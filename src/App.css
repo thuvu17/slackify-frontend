@@ -155,12 +155,14 @@ nav a:focus {
   margin: 1rem 0;
   padding: 2rem;
   display: grid;
-  grid-template-columns: 1fr 150px;
   border-radius: 5px;
 }
 
-.song-container p,
+.song-container p {
+  font-size: 1.25rem;
+  margin-bottom: 5px;
+},
 .song-container h2 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 20rem;
 }
