@@ -8,14 +8,14 @@ import {
 import './App.css';
 
 import Navbar from './Components/Navbar';
-import Games from './Components/Games';
+import Songs from './Components/Songs';
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="games" element={<Games />} />
+        <Route path="songs" element={<Songs />} />
       </Routes>
     </BrowserRouter>
   );
