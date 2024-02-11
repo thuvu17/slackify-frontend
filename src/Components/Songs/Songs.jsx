@@ -115,10 +115,7 @@ function Songs() {
       () => {
           axios.get(SONGS_EP)
               .then((response) => {
-                  const songs_object = response.data.Data;
-                  const keys = Object.keys(songs_object);
-                  const songs_array = keys.map((key) => songs_object[key]);
-                  set_songs(songs_array);
+                  set_songs(SongsObjectToArray(response.data));
               })
               .then()
               .catch((error) => { 
@@ -143,26 +140,26 @@ function Songs() {
 
   return (
   <div className="wrapper">
-      <h1>View All Songs</h1>
-      <button type="button" onClick={showAddSongForm}>
-        Add a Song
-      </button>
-      <AddSongForm
-        visible={addingSong}
-        cancel={hideAddSongForm}
-        fetchSongs={fetchSongs}
-        set_error={set_error}
-      />
-      {songs.map((song) => (
-          <div className='song-container' key={song._id}>
-          <h2>{song.name}</h2>
-              <p>Aritst: {song.artist}</p>
-              <p>Album: {song.album}</p>
-              <p>Genre: {song.genre}</p>
-              <p>BPM: {song.bpm}</p>
-          </div>
-      ))}
-      {error && <ErrorMessage message={error} />}
+    <h1>View All Songs</h1>
+    <button type="button" onClick={showAddSongForm}>
+      Add a Song
+    </button>
+    <AddSongForm
+      visible={addingSong}
+      cancel={hideAddSongForm}
+      fetchSongs={fetchSongs}
+      set_error={set_error}
+    />
+    {songs.map((song) => (
+      <div className='song-container' key={song._id}>
+        <h2>{song.name}</h2>
+          <p>Aritst: {song.artist}</p>
+          <p>Album: {song.album}</p>
+          <p>Genre: {song.genre}</p>
+          <p>BPM: {song.bpm}</p>
+      </div>
+    ))}
+    {error && <ErrorMessage message={error} />}
   </div>
   );
 }
