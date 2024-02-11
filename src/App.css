@@ -11,7 +11,6 @@ html {
   --buff: hsla(27, 64%, 65%, 1);
   --bistre: hsla(10, 31%, 19%, 1);
   --off-white: hsla(45, 29%, 97%, 1);
-
   --background-color: var(--off-white);
   --accent-color: var(--cambridge-blue);
   background-color: var(--background-color);
@@ -33,12 +32,12 @@ button {
   font-size: 1.5rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
-
   border-radius: 5px;
   border: 2px solid var(--accent-color);
   color: var(--accent-color);
   background: var(--background-color);
 }
+
 button:focus,
 button:hover {
   background: var(--accent-color);
@@ -69,6 +68,7 @@ form label {
   position: relative;
   z-index: 1;
 }
+
 form label::before,
 form label::after {
   content: '';
@@ -86,9 +86,11 @@ form label::after {
 form button {
   margin-right: 1rem;
 }
+
 form button[type=button] {
   border-color: var(--background-color);
 }
+
 form button[type=button]:focus,
 form button[type=button]:hover {
   border-color: var(--accent-color);
@@ -118,6 +120,7 @@ nav a {
   border-radius: 5px 5px 0 0;
   position: relative;
 }
+
 nav a:hover::before,
 nav a:focus::before {
   content: '';
@@ -130,6 +133,7 @@ nav a:focus::before {
   bottom: 0;
   left: calc(var(--padding) * -1 + 1px);
 }
+
 nav a:hover::after,
 nav a:focus::after {
   content: '';
@@ -159,10 +163,12 @@ nav a:focus {
 }
 
 .song-container p {
+  margin-bottom: 2.0px;
   font-size: 1.25rem;
-  margin-bottom: 5px;
-},
+  margin-left: 1.5rem;
+}
+
 .song-container h2 {
-  margin: 0;
-  font-size: 20rem;
+  margin: 1.0px;
+  font-size: 1.75rem;
 }
