@@ -27,13 +27,7 @@ function AddSongForm({
 
   const addSong = (event) => {
     event.preventDefault();
-    axios.post(SONGS_EP, {
-      "name": name,
-      "artist": artist,
-      "album": album,
-      "genre": genre,
-      "bpm": bpm,
-    })
+    axios.post(SONGS_EP, {name, artist, album, genre, bpm})
       .then(fetchSongs)
       .catch(() => { set_error('There was a problem adding the Song.'); });
   };
@@ -41,29 +35,19 @@ function AddSongForm({
   if (!visible) return null;
   return (
     <form>
-      <label htmlFor="name">
-        Name
-      </label>
+      <label htmlFor="name">Name</label>
       <input required type="text" id="name" value={name} onChange={changeName} />
 
-      <label htmlFor="artist">
-        Artist
-      </label>
+      <label htmlFor="artist">Artist</label>
       <input required type="text" id="artist" value={artist} onChange={changeArtist} />
 
-      <label htmlFor="album">
-        Album
-      </label>
+      <label htmlFor="album">Album</label>
       <input required type="text" id="album" value={album} onChange={changeAlbum} />
       
-      <label htmlFor="genre">
-        Genre
-      </label>
+      <label htmlFor="genre">Genre</label>
       <input required type="text" id="genre" value={genre} onChange={changeGenre} />
 
-      <label htmlFor="bpm">
-        BPM
-      </label>
+      <label htmlFor="bpm">BPM</label>
       <input required type="text" id="bpm" value={bpm} onChange={changeBPM} />
 
       <button type="button" onClick={cancel}>Cancel</button>
