@@ -62,6 +62,7 @@ form input {
 
 form label {
   margin-left: 1rem;
+  margin-top: 1.5rem;
   display: block;
   height: 0;
   width: fit-content;
@@ -171,4 +172,9 @@ nav a:focus {
 .song-container h2 {
   margin: 1.0px;
   font-size: 1.75rem;
+}
+
+.add-song-result {
+  font-style: italic;
+  font-size: 1.0rem;
 }

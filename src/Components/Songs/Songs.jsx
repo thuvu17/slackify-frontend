@@ -18,18 +18,33 @@ function AddSongForm({
   const [album, setAlbum] = useState('');
   const [genre, setGenre] = useState('');
   const [bpm, setBPM] = useState(0);
+  const [add_song_result, setAddSongResult] = useState('');
 
   const changeName = (event) => { setName(event.target.value); };
   const changeArtist = (event) => { setArtist(event.target.value); };
   const changeAlbum = (event) => { setAlbum(event.target.value); };
   const changeGenre = (event) => { setGenre(event.target.value); };
   const changeBPM = (event) => { setBPM(event.target.value); };
+  const changeSucessMsg = () => { setAddSongResult(`${name} by ${artist} has been added to the database`); };
+  const changeFailMsg = () => { setAddSongResult('There was a problem adding the song.'); };
 
   const addSong = (event) => {
     event.preventDefault();
-    axios.post(SONGS_EP, {name, artist, album, genre, bpm})
-      .then(fetchSongs)
-      .catch(() => { set_error('There was a problem adding the Song.'); });
+    axios.post(SONGS_EP, { name, artist, album, genre, bpm })
+      .then(
+        changeSucessMsg(),
+        // Reset form fields
+        setName(''),
+        setArtist(''),
+        setAlbum(''),
+        setGenre(''),
+        setBPM(0),
+        fetchSongs,
+      )
+      .catch(() => {
+        set_error('There was a problem adding the song.');
+        changeFailMsg();
+      });
   };
 
   if (!visible) return null;
@@ -52,6 +67,11 @@ function AddSongForm({
 
       <button type="button" onClick={cancel}>Cancel</button>
       <button type="submit" onClick={addSong}>Submit</button>
+
+      <div className='add-song-result'>
+        <td>{ add_song_result }</td>
+      </div>
+
     </form>
   );
 }
@@ -60,6 +80,7 @@ AddSongForm.propTypes = {
   cancel: propTypes.func.isRequired,
   fetchSongs: propTypes.func.isRequired,
   set_error: propTypes.func.isRequired,
+  add_song_result: propTypes.string.isRequired,
 };
 
 
