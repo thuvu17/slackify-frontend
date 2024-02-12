@@ -28,6 +28,11 @@ html {
   align-items: center;
 }
 
+.title {
+  color: #ffffff; font-family: 'Helvetica Neue', sans-serif; font-size: 275px; font-weight: bold; letter-spacing: -1px; line-height: 1;
+  align-items: left;
+}
+
 button {
   font-size: 1.5rem;
   padding: 0.5rem 1rem;
