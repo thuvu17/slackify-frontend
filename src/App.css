@@ -160,7 +160,8 @@ nav a:focus {
   outline: none;
 }
 
-.song-container {
+.song-container,
+.user-container {
   border: 2px solid var(--accent-color);
   margin: 1rem 0;
   padding: 2rem;
@@ -168,15 +169,17 @@ nav a:focus {
   border-radius: 5px;
 }
 
-.song-container p {
-  margin-bottom: 2.0px;
-  font-size: 1.25rem;
-  margin-left: 1.5rem;
+.song-container p,
+.user-container p {
+    margin-bottom: 2.0px;
+    font-size: 1.25rem;
+    margin-left: 1.5rem;
 }
 
-.song-container h2 {
-  margin: 1.0px;
-  font-size: 1.75rem;
+.song-container h2,
+.user-container h2 {
+    margin: 1.0px;
+    font-size: 1.75rem;
 }
 
 .add-song-result {

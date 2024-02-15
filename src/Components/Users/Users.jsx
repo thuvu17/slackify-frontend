@@ -143,8 +143,8 @@ function Users() {
       fetchUsers={fetchUsers}
       set_error={set_error}
     />
-    {users.map((user) => (
-      <div className='user-container' key={user._id}>
+          {users.map((user) => (
+              <div className='user-container' key={user._id}>
         <h2>{user.name}</h2>
           <p>Email: {user.email}</p>
           <p>Password: {user.password}</p>
