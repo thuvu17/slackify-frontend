@@ -11,12 +11,12 @@ function AddUserForm({
   visible,
   cancel,
   fetchUsers,
-  set_error,
+  setError,
 }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [add_user_result, setAddUserResult] = useState('');
+  const [addUserResult, setAddUserResult] = useState('');
 
   const changeName = (event) => { setName(event.target.value); };
   const changeEmail = (event) => { setEmail(event.target.value); };
@@ -36,7 +36,7 @@ function AddUserForm({
         fetchUsers,
       )
       .catch(() => {
-        set_error('There was a problem adding the user.');
+        setError('There was a problem adding the user.');
         changeFailMsg();
       });
   };
@@ -57,7 +57,7 @@ function AddUserForm({
       <button type="submit" onClick={addUser}>Submit</button>
 
       <div className='add-user-result'>
-        <td>{ add_user_result }</td>
+        <td>{ addUserResult }</td>
       </div>
 
     </form>
@@ -67,8 +67,8 @@ AddUserForm.propTypes = {
   visible: propTypes.bool.isRequired,
   cancel: propTypes.func.isRequired,
   fetchUsers: propTypes.func.isRequired,
-  set_error: propTypes.func.isRequired,
-  add_user_result: propTypes.string.isRequired,
+  setError: propTypes.func.isRequired,
+  addUserResult: propTypes.string.isRequired,
 };
 
 
@@ -92,38 +92,38 @@ function ErrorMessage({ message }) {
 
 
 function Users() {
-  const [users, set_users] = useState([]);
-  const [error, set_error] = useState('');
+  const [users, setUsers] = useState([]);
+  const [error, setError] = useState('');
   const [addingUser, setAddingUser] = useState(false);
   const showAddUserForm = () => { setAddingUser(true); };
   const hideAddUserForm = () => { setAddingUser(false); };
    
   const fetchUsers = () => {
     axios.get(USERS_EP)
-      .then(({ data }) => set_users(UsersObjectToArray(data)))
-      .catch(() => set_error('There was a problem retrieving the list of Users.'));
+      .then(({ data }) => setUsers(UsersObjectToArray(data)))
+      .catch(() => setError('There was a problem retrieving the list of Users.'));
   };
 
   useEffect(
       () => {
           axios.get(USERS_EP)
               .then((response) => {
-                  set_users(UsersObjectToArray(response.data));
+                  setUsers(UsersObjectToArray(response.data));
               })
               .then()
               .catch((error) => { 
                   if (error.response) {
                       // The request was made and the server responded with a status code
                       console.error('Server Error:', error.response.data);
-                      set_error('Server Error: ' + error.response.data.message); // Assuming the server sends error messages in a 'message' field
+                      setError('Server Error: ' + error.response.data.message); // Assuming the server sends error messages in a 'message' field
                   } else if (error.request) {
                       // The request was made but no response was received
                       console.error('Network Error:', error.request);
-                      set_error('Network Error: No response from server');
+                      setError('Network Error: No response from server');
                   } else {
                       // Something else happened while setting up the request
                       console.error('Request Error:', error.message);
-                      set_error('Request Error: ' + error.message);
+                      setError('Request Error: ' + error.message);
                   }
               });
               
@@ -141,7 +141,7 @@ function Users() {
       visible={addingUser}
       cancel={hideAddUserForm}
       fetchUsers={fetchUsers}
-      set_error={set_error}
+      setError={setError}
     />
           {users.map((user) => (
               <div className='user-container' key={user._id}>
