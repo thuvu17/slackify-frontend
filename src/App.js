@@ -10,6 +10,7 @@ import './App.css';
 
 import Navbar from './Components/Navbar';
 import Songs from './Components/Songs';
+import Users from './Components/Users';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="songs" element={<Songs />} />
+        <Route path="users" element={<Users />} />
       </Routes>
     </BrowserRouter>
     </>

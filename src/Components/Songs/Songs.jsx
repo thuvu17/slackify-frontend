@@ -11,14 +11,14 @@ function AddSongForm({
   visible,
   cancel,
   fetchSongs,
-  set_error,
+  setError,
 }) {
   const [name, setName] = useState('');
   const [artist, setArtist] = useState('');
   const [album, setAlbum] = useState('');
   const [genre, setGenre] = useState('');
   const [bpm, setBPM] = useState(0);
-  const [add_song_result, setAddSongResult] = useState('');
+  const [addSongResult, setAddSongResult] = useState('');
 
   const changeName = (event) => { setName(event.target.value); };
   const changeArtist = (event) => { setArtist(event.target.value); };
@@ -42,7 +42,7 @@ function AddSongForm({
         fetchSongs,
       )
       .catch(() => {
-        set_error('There was a problem adding the song.');
+        setError('There was a problem adding the song.');
         changeFailMsg();
       });
   };
@@ -69,7 +69,7 @@ function AddSongForm({
       <button type="submit" onClick={addSong}>Submit</button>
 
       <div className='add-song-result'>
-        <td>{ add_song_result }</td>
+        <td>{ addSongResult }</td>
       </div>
 
     </form>
@@ -79,8 +79,8 @@ AddSongForm.propTypes = {
   visible: propTypes.bool.isRequired,
   cancel: propTypes.func.isRequired,
   fetchSongs: propTypes.func.isRequired,
-  set_error: propTypes.func.isRequired,
-  add_song_result: propTypes.string.isRequired,
+  setError: propTypes.func.isRequired,
+  addSongResult: propTypes.string.isRequired,
 };
 
 
@@ -104,38 +104,38 @@ function ErrorMessage({ message }) {
 
 
 function Songs() {
-  const [songs, set_songs] = useState([]);
-  const [error, set_error] = useState('');
+  const [songs, setSongs] = useState([]);
+  const [error, setError] = useState('');
   const [addingSong, setAddingSong] = useState(false);
   const showAddSongForm = () => { setAddingSong(true); };
   const hideAddSongForm = () => { setAddingSong(false); };
    
   const fetchSongs = () => {
     axios.get(SONGS_EP)
-      .then(({ data }) => set_songs(SongsObjectToArray(data)))
-      .catch(() => set_error('There was a problem retrieving the list of Songs.'));
+      .then(({ data }) => setSongs(SongsObjectToArray(data)))
+      .catch(() => setError('There was a problem retrieving the list of Songs.'));
   };
 
   useEffect(
       () => {
           axios.get(SONGS_EP)
               .then((response) => {
-                  set_songs(SongsObjectToArray(response.data));
+                  setSongs(SongsObjectToArray(response.data));
               })
               .then()
               .catch((error) => { 
                   if (error.response) {
                       // The request was made and the server responded with a status code
                       console.error('Server Error:', error.response.data);
-                      set_error('Server Error: ' + error.response.data.message); // Assuming the server sends error messages in a 'message' field
+                      setError('Server Error: ' + error.response.data.message); // Assuming the server sends error messages in a 'message' field
                   } else if (error.request) {
                       // The request was made but no response was received
                       console.error('Network Error:', error.request);
-                      set_error('Network Error: No response from server');
+                      setError('Network Error: No response from server');
                   } else {
                       // Something else happened while setting up the request
                       console.error('Request Error:', error.message);
-                      set_error('Request Error: ' + error.message);
+                      setError('Request Error: ' + error.message);
                   }
               });
               
@@ -153,7 +153,7 @@ function Songs() {
       visible={addingSong}
       cancel={hideAddSongForm}
       fetchSongs={fetchSongs}
-      set_error={set_error}
+      setError={setError}
     />
     {songs.map((song) => (
       <div className='song-container' key={song._id}>
