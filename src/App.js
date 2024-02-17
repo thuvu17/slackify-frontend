@@ -22,6 +22,7 @@ function App() {
         <Route path="users" element={<Users />} />
       </Routes>
     </BrowserRouter>
+    <div className='title'>Slackify</div>
     </>
   );
 }
