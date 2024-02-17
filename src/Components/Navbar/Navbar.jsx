@@ -7,6 +7,7 @@ const PAGES = [
   { label: 'View All Songs', destination: '/songs' },
   { label: 'View All Users', destination: '/users' },
   { label: 'View All Playlists', destination: '/playlists' },
+  { label: 'Sign In', destination: '/sign_in' },
 ];
 
 function NavLink({ page }) {
