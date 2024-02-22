@@ -24,7 +24,7 @@ function App() {
           <Route path="" element={<Home />} />
           <Route path="songs" element={<Songs />} />
           <Route path="users" element={<Users />} />
-          <Route path="playlists" element={<Playlists />} />
+          {/* <Route path="playlists" element={<Playlists />} /> */}
           <Route path="sign_in" element={<SignIn />} />
       </Routes>
     </BrowserRouter>
