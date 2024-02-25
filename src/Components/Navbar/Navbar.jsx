@@ -29,7 +29,7 @@ function Navbar() {
   return (
     <>
     <nav>
-      <title className="title">Slackify</title>
+      <div className='title'>Slackify</div>
       <ul className="wrapper">
         {PAGES.map((page) => <NavLink key={page.destination} page={page} />)}
       </ul>
