@@ -12,6 +12,7 @@ import Home from './Components/Home';
 import Navbar from './Components/Navbar';
 import Songs from './Components/Songs';
 import Users from './Components/Users';
+import Playlists from './Components/Playlists';
 import SignIn from './Components/SignIn';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="" element={<Home />} />
           <Route path="songs" element={<Songs />} />
           <Route path="users" element={<Users />} />
+          {/* <Route path="playlists" element={<Playlists />} /> */}
           <Route path="sign_in" element={<SignIn />} />
       </Routes>
     </BrowserRouter>
