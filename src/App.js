@@ -12,7 +12,7 @@ import Home from './Components/Home';
 import Navbar from './Components/Navbar';
 import Songs from './Components/Songs';
 import Users from './Components/Users';
-import Playlists from './Components/Playlists';
+// import Playlists from './Components/Playlists';
 import SignIn from './Components/SignIn';
 
 function App() {
