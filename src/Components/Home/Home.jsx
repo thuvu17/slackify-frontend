@@ -11,7 +11,7 @@ function Home() {
        <>
        <Container>
          <Row>
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '23rem' }}>
                <Card.Img variant="top" src="./public/StockPng/workout_pic.png" />
                <Card.Body>
                <Card.Title>View Our Songs</Card.Title>
