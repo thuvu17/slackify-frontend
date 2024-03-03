@@ -33,10 +33,10 @@ function SignInForm() {
     return (
       <form> 
         <label htmlFor="email">Email</label>
-        <input required type="text" id="email" value={email} onChange={changeEmail}/>
+        <input required type="text" placeholder="Enter email" id="email" value={email} onChange={changeEmail}/>
   
         <label htmlFor="password">Password</label>
-        <input required type="text" id="password" value={password} onChange={changePassword}/>
+        <input required type="password" placeholder="Enter password" id="password" value={password} onChange={changePassword}/>
   
         <button type="submit" onClick={addUser}>Submit</button>
   
