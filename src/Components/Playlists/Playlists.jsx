@@ -45,7 +45,7 @@
 //   if (!visible) return null;
 //   return (
 //     <form>
-//       <label htmlFor="name">Name</label>
+//       <label htmlFor="name">Song name</label>
 //       <input required type="text" id="name" value={name} onChange={changeName} />
 
 //       <label htmlFor="email">Email</label>
