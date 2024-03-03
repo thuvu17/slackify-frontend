@@ -11,16 +11,17 @@ function Home() {
        <>
        <Container>
          <Row>
-            <Card style={{ width: '18rem' }}>
-               <Card.Img variant="top" src="./public/StockPng/workout_pic.png" />
+            <Card className="home-card" style={{ width: '18rem' }}>
+               <Card.Img variant="top" src="./public/logo192.png"/>
                <Card.Body>
-               <Card.Title>View Our Songs</Card.Title>
-                  <Card.Text>
-                     Packed with high-energy tracks, it is your go-to source for a powerful and motivating fitness experience. 
+               <Card.Title className="card-title">View Our Songs</Card.Title>
+                  <Card.Text> 
                      From heart-pounding beats to adrenaline-pumping melodies, elevate your workout with the perfect soundtrack. 
                      Make every rep count with Slackify!
                   </Card.Text>
-                  <Button href="/songs">Go to Songs</Button>
+                  <a href="/songs">
+                     <Button className="home-button">Go to Songs</Button>
+                  </a>
                </Card.Body>
                </Card>
             </Row>
