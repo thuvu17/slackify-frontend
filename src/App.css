@@ -9,18 +9,49 @@ html {
   --cambridge-blue: hsla(132, 27%, 63%, 1);
   --lemon-chiffon: hsla(58, 74%, 85%, 1);
   --light-buff: hsla(45, 36%, 96%, 1);
-  --brown: hsla(34, 47%, 22%, 1);
+  --green1: rgb(88, 121, 91);
+  --green2: rgb(74, 95, 77);
   --buff: hsla(27, 64%, 65%, 1);
   --bistre: hsla(10, 31%, 19%, 1);
   --off-white: hsla(45, 29%, 97%, 1);
   --background-color: var(--light-buff);
-  --accent-color: var(--brown);
-  background-color: var(--background-color);
+  --accent-color: var(--green1);
+  --black: rgb(39, 35, 35);
+  background-color: var(--black);
 }
 
 .wrapper {
   max-width: min(800px, 100% - 4rem);
   margin-inline: auto;
+}
+
+h1 {
+  color: var(--off-white)
+}
+
+h2 {
+  color: var(--off-white)
+}
+
+p {
+  color: var(--off-white)
+}
+
+.home_title {
+  font-size: 40px;
+  color: var(--off-white);
+  text-align: center;
+  font-weight: bold;
+}
+
+.photo {
+  height: 350px;
+  width: 350px;
+  align-items: 'center';
+  text-align: center;
+  display: block;
+  justify-content: center;
+  margin: auto;
 }
 
 .wrapper header {
@@ -31,7 +62,7 @@ html {
 }
 
 .title {
-  color: var(--off-white); font-family: 'Helvetica Neue', sans-serif; font-size: 45px; font-weight: bold; letter-spacing: -1px; line-height: 1;
+  color: var(--off-white); font-family: 'Lato', sans-serif; font-size: 45px; font-weight: bold; letter-spacing: -1px; line-height: 1;
   align-items: center;
   text-align: center;
   float: left;
@@ -58,6 +89,7 @@ button:hover {
 .card-title {
   font-size: 16px;
   font-weight: bold;  
+  color: var(--off-white)
 }
 
 .error-message {
