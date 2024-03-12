@@ -16,28 +16,28 @@ function AddSongForm({
   const [name, setName] = useState('');
   const [artist, setArtist] = useState('');
   const [album, setAlbum] = useState('');
-  const [genre, setGenre] = useState('');
+  const [energy, setEnergy] = useState(0);
   const [bpm, setBPM] = useState(0);
   const [addSongResult, setAddSongResult] = useState('');
 
   const changeName = (event) => { setName(event.target.value); };
   const changeArtist = (event) => { setArtist(event.target.value); };
   const changeAlbum = (event) => { setAlbum(event.target.value); };
-  const changeGenre = (event) => { setGenre(event.target.value); };
+  const changeEnergy = (event) => { setEnergy(event.target.value); };
   const changeBPM = (event) => { setBPM(event.target.value); };
   const changeSucessMsg = () => { setAddSongResult(`${name} by ${artist} has been added to the database`); };
   const changeFailMsg = () => { setAddSongResult('There was a problem adding the song.'); };
 
   const addSong = (event) => {
     event.preventDefault();
-    axios.post(SONGS_EP, { name, artist, album, genre, bpm })
+    axios.post(SONGS_EP, { name, artist, album, energy, bpm })
       .then(
         changeSucessMsg(),
         // Reset form fields
         setName(''),
         setArtist(''),
         setAlbum(''),
-        setGenre(''),
+        setEnergy(0),
         setBPM(0),
         fetchSongs,
       )
@@ -59,8 +59,8 @@ function AddSongForm({
       <label htmlFor="album">Album</label>
       <input required type="text" id="album" value={album} onChange={changeAlbum} />
       
-      <label htmlFor="genre">Genre</label>
-      <input required type="text" id="genre" value={genre} onChange={changeGenre} />
+      <label htmlFor="genre">Energy</label>
+      <input required type="text" id="genre" value={energy} onChange={changeEnergy} />
 
       <label htmlFor="bpm">BPM</label>
       <input required type="text" id="bpm" value={bpm} onChange={changeBPM} />
@@ -160,7 +160,7 @@ function Songs() {
         <h2>{song.name}</h2>
           <p>Aritst: {song.artist}</p>
           <p>Album: {song.album}</p>
-          <p>Genre: {song.genre}</p>
+          <p>Energy: {song.energy}</p>
           <p>BPM: {song.bpm}</p>
       </div>
     ))}
