@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import propTypes from 'prop-types';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 import { BACKEND_URL } from '../../constants';
 
@@ -25,6 +26,7 @@ function SignInForm() {
       const user = { email, password };
       // send the email and password to the server
       const response = await axios.post(
+        // need to change the link here
         "http://blogservice.herokuapp.com/api/login",
       user
     );
@@ -50,6 +52,14 @@ function SignInForm() {
           changeFailMsg();
         });
     };
+
+    useEffect(() => {
+      const loggedInUser = localStorage.getItem("user");
+      if (loggedInUser) {
+        const foundUser = JSON.parse(loggedInUser);
+        setUser(foundUser);
+      }
+    }, []);
   
     return (
       <form onSubmit={handleSubmit}> 
