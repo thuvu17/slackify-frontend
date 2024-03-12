@@ -21,10 +21,12 @@ function SignInForm() {
   
     const addUser = (event) => {
       event.preventDefault();
-      axios.post(SIGN_IN_EP/email/password)
-        .then(
-            navigate(`/${email}`)
-        )
+      axios.get(`${SIGN_IN_EP}/${email}/${password}`)
+        .then((response) => {
+          const user_id = response.data._id;
+          console.log(user_id)
+            navigate(`/${user_id}`);
+        })  
         .catch(() => {
           changeFailMsg();
         });
