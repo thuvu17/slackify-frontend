@@ -13,6 +13,7 @@ import Navbar from './Components/Navbar';
 import Songs from './Components/Songs';
 import Users from './Components/Users';
 // import Playlists from './Components/Playlists';
+import UserMenu from './Components/UserHome/UserHome';
 import SignIn from './Components/SignIn';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="users" element={<Users />} />
           {/* <Route path="playlists" element={<Playlists />} /> */}
           <Route path="sign_in" element={<SignIn />} />
+          <Route path="user_menu/:user_id" element={<UserMenu />} />
       </Routes>
     </BrowserRouter>
     </>

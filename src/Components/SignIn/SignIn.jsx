@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 import { BACKEND_URL } from '../../constants';
 
+const USER_MENU_URL = '/user_menu';
 const SIGN_IN_EP = `${BACKEND_URL}/sign_in`;
 
 
@@ -48,7 +49,7 @@ function SignInForm() {
         .then((response) => {
           const user_id = response.data._id;
           console.log(user_id)
-            navigate(`/${user_id}`);
+          navigate(`${USER_MENU_URL}/${user_id}`, {replace: true});
         })  
         .catch(() => {
           changeFailMsg();
