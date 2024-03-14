@@ -48,7 +48,6 @@ function SignInForm() {
       axios.get(`${SIGN_IN_EP}/${email}/${password}`)
         .then((response) => {
           const user_id = response.data._id;
-          console.log(user_id)
           navigate(`${USER_MENU_URL}/${user_id}`, {replace: true});
         })  
         .catch(() => {

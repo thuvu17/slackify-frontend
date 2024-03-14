@@ -27,7 +27,7 @@ function App() {
           <Route path="users" element={<Users />} />
           {/* <Route path="playlists" element={<Playlists />} /> */}
           <Route path="sign_in" element={<SignIn />} />
-          <Route path="user_menu/:user_id" element={<UserMenu />} />
+          <Route path="user_menu/:userId" element={<UserMenu />} />
       </Routes>
     </BrowserRouter>
     </>
