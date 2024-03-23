@@ -34,8 +34,8 @@ function UserMenu() {
     <div>
           <h1>Welcome, User {userData.name}</h1>
       <ul>
-        <li>Name: {userData.name}</li>
         <li>Email: {userData.email}</li>
+        <li>Playlist: {userData.playlists}</li>
         {/* Other user menu content */}
       </ul>
     </div>
