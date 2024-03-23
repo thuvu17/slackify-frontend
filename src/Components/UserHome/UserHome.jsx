@@ -36,7 +36,11 @@ function UserMenu() {
       <ul>
         <li>Email: {userData.email}</li>
         <li>Playlist: {userData.playlists}</li>
-        {/* Other user menu content */}
+          <ul>
+            {userData.playlists.map((playlist, index) => (
+              <li key={index}>{playlist}</li>
+            ))}
+          </ul>
       </ul>
     </div>
   );
