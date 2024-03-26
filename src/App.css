@@ -37,6 +37,10 @@ p {
   color: var(--off-white)
 }
 
+li {
+  color: var(--off-white)
+}
+
 .home_title {
   font-size: 40px;
   color: var(--off-white);
