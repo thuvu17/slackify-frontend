@@ -32,7 +32,7 @@ function UserMenu() {
 
   return (
     <div>
-          <h1>Welcome, User {userData.name}</h1>
+          <div className="userHome_title">Welcome, User {userData.name}</div>
       <ul>
         <li>Email: {userData.email}</li>
         <li>Playlist: {userData.playlists}</li>
