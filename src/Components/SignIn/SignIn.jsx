@@ -50,8 +50,14 @@ function SignInForm() {
           const user_id = response.data._id;
           navigate(`${USER_MENU_URL}/${user_id}`, {replace: true});
         })  
-        .catch(() => {
-          changeFailMsg();
+        .catch(error => {
+          if (error.response) {
+            console.error(error.response.data);
+            setError(error.response.data.message);
+          } else {
+            // Something else happened while setting up the request
+            changeFailMsg();
+          }
         });
     };
 
