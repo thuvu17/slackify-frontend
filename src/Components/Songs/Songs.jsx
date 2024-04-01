@@ -27,6 +27,7 @@ function AddSongForm({
   const changeBPM = (event) => { setBPM(event.target.value); };
   const changeSucessMsg = () => { setAddSongResult(`${name} by ${artist} has been added to the database`); };
   const changeFailMsg = () => { setAddSongResult('There was a problem adding the song.'); };
+  // Get error msg from backend
 
   const addSong = (event) => {
     event.preventDefault();
@@ -41,11 +42,16 @@ function AddSongForm({
         setBPM(0),
         fetchSongs,
       )
-      .catch(() => {
-        setError('There was a problem adding the song.');
-        changeFailMsg();
+    .catch(error => {
+        if (error.response) {
+          console.error(error.response.data);
+          setError(error.response.data.message);
+        } else {
+          // Something else happened while setting up the request
+          changeFailMsg();
+        }
       });
-  };
+    };
 
   if (!visible) return null;
   return (
