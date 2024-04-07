@@ -21,6 +21,7 @@ function SignInForm() {
     const changeFailMsg = () => { setAddUserResult('There was a problem adding the user.'); };
     const changeEmail = (event) => { setEmail(event.target.value); };
     const changePassword = (event) => { setPassword(event.target.value); };
+    const [setError] = useState("")
 
     const handleSubmit = async e => {
       e.preventDefault();
