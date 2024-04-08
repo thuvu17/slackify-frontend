@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
+// import axios from 'axios';
+// import { BACKEND_URL } from '../../constants';
 
 /* This is an array that contains a list of fields in the form. It's hardcoded
  * here for demonstration purposes, but you can get it from the backend too.
@@ -102,3 +104,51 @@ Form.propTypes = {
 export default function FormWrapper() {
   return <Form fields={FORM} />;
 }
+
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { BACKEND_URL } from '../../constants';
+
+// function LoginForm() {
+//   const [formFields, setFormFields] = useState([]);
+
+//   useEffect(() => {
+//     async function fetchLoginForm() {
+//       try {
+//         const response = await axios.get(`${BACKEND_URL}/form`);
+//         setFormFields(response.data);
+//       } catch (error) {
+//         console.error('Error fetching login form:', error);
+//       }
+//     }
+
+//     fetchLoginForm();
+//   }, []);
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     // Handle form submission here
+//   };
+
+//   return (
+//     <div>
+//       <h2>Login Form</h2>
+//       <form onSubmit={handleSubmit}>
+//         {formFields.map(field => (
+//           <div key={field.FLD_NM}>
+//             <label htmlFor={field.FLD_NM}>{field.ff.QSTN}</label>
+//             <input
+//               type={field.ff.PARAM_TYPE}
+//               id={field.FLD_NM}
+//               name={field.FLD_NM}
+//               required={field.ff.OPT === false}
+//             />
+//           </div>
+//         ))}
+//         <button type="submit">Submit</button>
+//       </form>
+//     </div>
+//   );
+// }
+
+// export default LoginForm;
