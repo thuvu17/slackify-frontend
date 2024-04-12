@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { BACKEND_URL } from '../../constants';
 import axios from 'axios';
 
-const USER_MENU_EP = `${BACKEND_URL}user_menu`;
+const USER_MENU_EP = `${BACKEND_URL}/user_menu`;
 
 
 function UserMenu() {
