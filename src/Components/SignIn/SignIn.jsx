@@ -14,6 +14,7 @@ function SignInForm() {
     const [formData, setFormData] = useState({});
     const [login_error, setLoginError] = useState('');
     const [form_error, setFormError] = useState('');
+    const [showPassword, setShowPassword] = useState(false)
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -65,15 +66,21 @@ function SignInForm() {
                 <div key={key}>
                 <label htmlFor={key}>{key}</label>
                 <input
-                    type={key === 'password' ? 'password' : 'text'}
+                    type={key === 'password' ? (showPassword? 'text': 'password') : 'text'}
                     id={key}
                     value={value || ''}
                     onChange={handleInputChange}
                 />
+                {key === 'password' && (
+                    <button type="button" onClick={() => setShowPassword((prev) => !prev)}>
+                        {showPassword ? 'Hide' : 'Show'} Password
+                    </button>
+                )}
                 </div>
             ))}
                 {form_error && <div style={{ color: 'red' }}>{form_error}</div>}
                 {login_error && <div style={{ color: 'red' }}>{login_error}</div>}
+                
         <button type="submit">Login</button>
         </form>
         <br />
