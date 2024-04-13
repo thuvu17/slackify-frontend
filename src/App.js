@@ -15,6 +15,7 @@ import Users from './Components/Users';
 // import Playlists from './Components/Playlists';
 import UserMenu from './Components/UserHome/UserHome';
 import SignIn from './Components/SignIn';
+import CreateAccount from './Components/CreateAccount'
 // import Form from './Components/Form';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           {/* <Route path="playlists" element={<Playlists />} /> */}
           <Route path="sign_in" element={<SignIn />} />
           <Route path="user_menu/:userId" element={<UserMenu />} />
+          <Route path="create_account" element={<CreateAccount />} />
       </Routes>
     </BrowserRouter>
     </>

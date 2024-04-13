@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { BACKEND_URL } from '../../constants';
@@ -84,6 +84,7 @@ function SignInForm() {
         <button type="submit">Login</button>
         </form>
         <br />
+        <Link to="/create_account">Need to create an account?</Link>
     </div>
     );
 }
