@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import axios from 'axios';
 
@@ -60,9 +60,11 @@ function CreateAccountForm() {
 
         {error && <ErrorMessage message={error} />}
 
-        <div className='create-user-result'>
-          <td>{ createUserResult }</td>
-        </div>
+        { createUserResult && 
+          <div className='create-user-result'>
+            <td>{ createUserResult }</td>
+             <Link to="/sign_in">Go to Sign In</Link>
+        </div>}
 
         <label htmlFor="name">Name</label>
         <input required type="text" id="name" value={name} onChange={changeName} />
