@@ -30,6 +30,11 @@ function UserMenu() {
     return <div>Loading...</div>;
   }
 
+  const logOut=()=>{
+    window.localStorage.clear();
+    window.localStorage.href="sign_in"
+  }
+
   return (
     <div>
           <div className="userHome_title">Welcome, User {userData.name}</div>
@@ -42,6 +47,7 @@ function UserMenu() {
             ))}
           </ul>
       </ul>
+      <button type="submit" onClick={logOut}>Log Out</button>
     </div>
   );
 }
