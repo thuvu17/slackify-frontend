@@ -32,7 +32,7 @@ function UserMenu() {
 
   const logOut=()=>{
     window.localStorage.clear();
-    window.localStorage.href="sign_in"
+    window.location.href = "/sign_in";
   }
 
   return (
