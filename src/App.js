@@ -19,6 +19,8 @@ import CreateAccount from './Components/CreateAccount'
 // import Form from './Components/Form';
 
 function App() {
+  // const isLoggedIn = window.localStorage.getItem("loggedIn");
+
   return (
     <>
     <BrowserRouter>

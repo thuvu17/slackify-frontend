@@ -24,6 +24,7 @@ function SignInForm() {
             .then((response) => {
                 const user_id = response.data._id;
                 console.log(response);
+                window.localStorage.setItem("loggedIn", true);
                 navigate(`${USER_MENU_URL}/${user_id}`, {replace: true});
             })  
             .catch(() => {
