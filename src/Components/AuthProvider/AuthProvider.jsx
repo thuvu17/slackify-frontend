@@ -1,25 +1,28 @@
 // come form source: https://dev.to/miracool/how-to-manage-user-authentication-with-react-js-3ic5
 
 import React, { useContext, createContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') || false);
-  const [userId, setUserId] = useState(localStorage.getItem("userId") || "");
+  const [isLoggedIn, setIsLoggedIn] = useState(!localStorage.getItem("isLoggedIn") ? false : JSON.parse(localStorage.getItem("isLoggedIn")));
+  const [userId, setUserId] = useState(!localStorage.getItem("userId") ? null : JSON.stringify(localStorage.getItem("userId")));
+  const navigate = useNavigate();
 
-  const logIn = (userId) => {
-      setIsLoggedIn(true);
-      setUserId(userId);
+  const logIn = (user_id) => {
       localStorage.setItem("isLoggedIn", true);
-      localStorage.setItem("userId", userId);
+      localStorage.setItem("userId", user_id);
+      setIsLoggedIn(true)
+      setUserId(user_id)
   };
 
   const logOut = () => {
-    setIsLoggedIn(false);
-    setUserId(null)
     localStorage.removeItem("userId");
     localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false)
+    setUserId(null)
+    navigate("/sign_in");
   };
 
   return (

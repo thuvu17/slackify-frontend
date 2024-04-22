@@ -26,20 +26,20 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <Navbar />
-        <AuthProvider>
+      <AuthProvider>
+        <Navbar />
           <Routes>
             <Route path="" element={<Home />} />
             <Route element={<PrivateRoute />}>
               <Route path="songs" element={<Songs />} />
               <Route path="users" element={<Users />} />
+              <Route path="user_menu/:userId" element={<UserMenu />} />
               {/* <Route path="playlists" element={<Playlists />} /> */}
             </Route>
             <Route path="sign_in" element={<SignIn />} />
-            <Route path="user_menu/:userId" element={<UserMenu />} />
             <Route path="create_account" element={<CreateAccount />} />
           </Routes>
-        </AuthProvider>
+      </AuthProvider>
     </BrowserRouter>
     </>
   );

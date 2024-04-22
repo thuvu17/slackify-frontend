@@ -1,21 +1,22 @@
 // UserMenu.jsx
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { BACKEND_URL } from '../../constants';
 import axios from 'axios';
+import { useAuth } from '../AuthProvider/AuthProvider';
 
 const USER_MENU_EP = `${BACKEND_URL}/user_menu`;
 
 
 function UserMenu() {
-    const { userId } = useParams();
-    console.log(userId)
+    // const { userId } = useParams();
     const [userData, setUserData] = useState(null);
+    const { logOut, userId } = useAuth()
 
     useEffect(() => {
         const fetchUserMenu = async () => {
             try {
-                const response = await axios.get(`${USER_MENU_EP}/${userId}`);
+                const response = await axios.get(`${USER_MENU_EP}/${JSON.parse(JSON.stringify(userId))}`);
                 setUserData(response.data);
             } catch (error) {
                 console.error('Error fetching user menu:', error);
@@ -23,17 +24,17 @@ function UserMenu() {
         };
 
         fetchUserMenu();
-    }, [userId]);
+    }, [JSON.parse(JSON.stringify(userId))]);
     
 
   if (!userData) {
     return <div>Loading...</div>;
   }
 
-  const logOut=()=>{
-    window.localStorage.clear();
-    window.location.href = "/sign_in";
-  }
+  // const logOut=()=>{
+  //   window.localStorage.clear();
+  //   window.location.href = "/sign_in";
+  // }
 
   return (
     <div>

@@ -16,7 +16,13 @@ function SignInForm() {
     const [login_error, setLoginError] = useState('');
     const [form_error, setFormError] = useState('');
     const [showPassword, setShowPassword] = useState(false)
-    const { logIn } = useAuth()
+    const { logIn, isLoggedIn, userId } = useAuth()
+
+    console.log("Sign in page isLoggedIn", isLoggedIn)
+
+    if (isLoggedIn) {
+        navigate(`${USER_MENU_URL}/${userId}`, {replace: true});
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -25,9 +31,7 @@ function SignInForm() {
         axios.get(`${SIGN_IN_EP}/${email}/${password}`)
             .then((response) => {
                 const user_id = response.data._id;
-                console.log(response);
                 logIn(user_id)
-                console.log('userid', user_id)
                 navigate(`${USER_MENU_URL}/${user_id}`, {replace: true});
             })  
             .catch(() => {
