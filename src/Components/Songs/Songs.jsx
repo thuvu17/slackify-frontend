@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
+import Player from '../Player';
 
 const SONGS_EP = `${BACKEND_URL}/songs`;
 
@@ -159,6 +160,10 @@ function Songs() {
       cancel={hideAddSongForm}
       fetchSongs={fetchSongs}
       setError={setError}
+    />
+    <Player
+      accessToken="BQAI_7RWPJuqdZxS-I8XzhkUi9RKr8Q8UUNaJAHwWlpIq6..."
+      trackUri={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
     />
     {songs.map((song) => (
       <div className='song-container' key={song._id}>
