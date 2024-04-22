@@ -16,7 +16,7 @@ function UserMenu() {
     useEffect(() => {
         const fetchUserMenu = async () => {
             try {
-                const response = await axios.get(`${USER_MENU_EP}/${JSON.parse(JSON.stringify(userId))}`);
+                const response = await axios.get(`${USER_MENU_EP}/${userId}`);
                 setUserData(response.data);
             } catch (error) {
                 console.error('Error fetching user menu:', error);
@@ -24,7 +24,7 @@ function UserMenu() {
         };
 
         fetchUserMenu();
-    }, [JSON.parse(JSON.stringify(userId))]);
+    }, [userId]);
     
 
   if (!userData) {

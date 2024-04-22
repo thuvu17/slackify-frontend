@@ -39,7 +39,7 @@ function Navbar() {
 
   if (isLoggedIn && !LOGGEDIN_PAGES.some((page) => (page.label === 'Profile'))) {
     console.log('no copy')
-    LOGGEDIN_PAGES.push({ label: 'Profile', destination: `${USER_MENU_URL}/${JSON.parse(userId)}` });
+    LOGGEDIN_PAGES.push({ label: 'Profile', destination: `${USER_MENU_URL}/${userId}` });
   }
 
   console.log(LOGGEDIN_PAGES)

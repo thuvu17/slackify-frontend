@@ -7,7 +7,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(!localStorage.getItem("isLoggedIn") ? false : JSON.parse(localStorage.getItem("isLoggedIn")));
-  const [userId, setUserId] = useState(!localStorage.getItem("userId") ? null : JSON.stringify(localStorage.getItem("userId")));
+  const [userId, setUserId] = useState(!localStorage.getItem("userId") ? null : JSON.parse(JSON.stringify(localStorage.getItem("userId"))));
   const navigate = useNavigate();
 
   const logIn = (user_id) => {
