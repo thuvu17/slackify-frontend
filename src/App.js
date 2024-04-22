@@ -16,6 +16,8 @@ import Users from './Components/Users';
 import UserMenu from './Components/UserHome/UserHome';
 import SignIn from './Components/SignIn';
 import CreateAccount from './Components/CreateAccount'
+import AuthProvider from "./Components/AuthProvider";
+import PrivateRoute from "./Components/PrivateRoute";
 // import Form from './Components/Form';
 
 function App() {
@@ -25,15 +27,19 @@ function App() {
     <>
     <BrowserRouter>
       <Navbar />
-        <Routes>
-          <Route path="" element={<Home />} />
-          <Route path="songs" element={<Songs />} />
-          <Route path="users" element={<Users />} />
-          {/* <Route path="playlists" element={<Playlists />} /> */}
-          <Route path="sign_in" element={<SignIn />} />
-          <Route path="user_menu/:userId" element={<UserMenu />} />
-          <Route path="create_account" element={<CreateAccount />} />
-      </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="" element={<Home />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="songs" element={<Songs />} />
+              <Route path="users" element={<Users />} />
+              {/* <Route path="playlists" element={<Playlists />} /> */}
+            </Route>
+            <Route path="sign_in" element={<SignIn />} />
+            <Route path="user_menu/:userId" element={<UserMenu />} />
+            <Route path="create_account" element={<CreateAccount />} />
+          </Routes>
+        </AuthProvider>
     </BrowserRouter>
     </>
   );
