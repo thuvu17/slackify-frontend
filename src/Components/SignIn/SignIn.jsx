@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { BACKEND_URL } from '../../constants';
+import { useAuth } from '../AuthProvider/AuthProvider';
 
 const USER_MENU_URL = '/user_menu';
 const FORM_EP = `${BACKEND_URL}/form`;
@@ -15,6 +16,7 @@ function SignInForm() {
     const [login_error, setLoginError] = useState('');
     const [form_error, setFormError] = useState('');
     const [showPassword, setShowPassword] = useState(false)
+    const { logIn } = useAuth()
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -24,6 +26,8 @@ function SignInForm() {
             .then((response) => {
                 const user_id = response.data._id;
                 console.log(response);
+                logIn(user_id)
+                console.log('userid', user_id)
                 navigate(`${USER_MENU_URL}/${user_id}`, {replace: true});
             })  
             .catch(() => {
