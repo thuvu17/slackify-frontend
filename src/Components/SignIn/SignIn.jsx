@@ -92,7 +92,7 @@ function SignInForm() {
         <button type="submit">Login</button>
         </form>
         <br />
-        <Link to="/create_account">Need to create an account?</Link>
+        <Link className={"link_styles"} to="/create_account">Need to create an account?</Link>
     </div>
     );
 }
