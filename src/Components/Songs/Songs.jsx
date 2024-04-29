@@ -125,12 +125,6 @@ function Songs() {
       .catch(() => setError('There was a problem retrieving the list of Songs.'));
   };
 
-  const fetchToken = () => {
-    axios.get(TOKEN_EP)
-      .then(({ data }) => setToken(data))
-      .catch(() => setError('There was a problem retrieving the token'));
-  };
-
   useEffect(
       () => {
           axios.get(SONGS_EP)
