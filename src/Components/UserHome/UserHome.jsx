@@ -9,14 +9,13 @@ const USER_MENU_EP = `${BACKEND_URL}/user_menu`;
 
 
 function UserMenu() {
-    // const { userId } = useParams();
     const [userData, setUserData] = useState(null);
-    const { logOut, userId } = useAuth()
+    const { logOut, user_id } = useAuth()
 
     useEffect(() => {
         const fetchUserMenu = async () => {
             try {
-                const response = await axios.get(`${USER_MENU_EP}/${userId}`);
+                const response = await axios.get(`${USER_MENU_EP}/${user_id}`);
                 setUserData(response.data);
             } catch (error) {
                 console.error('Error fetching user menu:', error);
@@ -24,21 +23,16 @@ function UserMenu() {
         };
 
         fetchUserMenu();
-    }, [userId]);
+    }, [user_id]);
     
 
   if (!userData) {
     return <div>Loading...</div>;
   }
 
-  // const logOut=()=>{
-  //   window.localStorage.clear();
-  //   window.location.href = "/sign_in";
-  // }
-
   return (
     <div>
-          <div className="userHome_title">Welcome, User {userData.name}</div>
+          <div className="userHome_title">Welcome, {userData.name}</div>
       <ul>
         <li>Email: {userData.email}</li>
         <li>Playlist: {userData.playlists}</li>
@@ -49,6 +43,7 @@ function UserMenu() {
           </ul>
       </ul>
       <button type="submit" onClick={logOut}>Log Out</button>
+
     </div>
   );
 }

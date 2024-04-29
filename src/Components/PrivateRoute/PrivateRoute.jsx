@@ -5,7 +5,7 @@ import { useAuth } from "../AuthProvider/AuthProvider";
 const PrivateRoute = () => {
   const user = useAuth();
   console.log('user', user)
-  if (!user.userId) return <Navigate to="/sign_in" />;
+  if (!user.user_id) return <Navigate to="/sign_in" />;
   return <Outlet />;
 };
 

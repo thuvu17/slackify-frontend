@@ -86,7 +86,7 @@ AddSongForm.propTypes = {
   cancel: propTypes.func.isRequired,
   fetchSongs: propTypes.func.isRequired,
   setError: propTypes.func.isRequired,
-  addSongResult: propTypes.string.isRequired,
+  addSongResult: propTypes.string,
 };
 
 
@@ -103,10 +103,11 @@ function ErrorMessage({ message }) {
         {message}
       </div>
     );
-  }
-  ErrorMessage.propTypes = {
-    message: propTypes.string.isRequired,
-  };
+}
+
+ErrorMessage.propTypes = {
+  message: propTypes.string.isRequired,
+};
 
 
 function Songs() {

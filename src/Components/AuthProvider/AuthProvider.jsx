@@ -7,18 +7,18 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(!localStorage.getItem("isLoggedIn") ? false : JSON.parse(localStorage.getItem("isLoggedIn")));
-  const [userId, setUserId] = useState(!localStorage.getItem("userId") ? null : JSON.parse(JSON.stringify(localStorage.getItem("userId"))));
+  const [user_id, setUserId] = useState(!localStorage.getItem("user_id") ? null : JSON.parse(JSON.stringify(localStorage.getItem("user_id"))));
   const navigate = useNavigate();
 
   const logIn = (user_id) => {
       localStorage.setItem("isLoggedIn", true);
-      localStorage.setItem("userId", user_id);
+      localStorage.setItem("user_id", user_id);
       setIsLoggedIn(true)
       setUserId(user_id)
   };
 
   const logOut = () => {
-    localStorage.removeItem("userId");
+    localStorage.removeItem("user_id");
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false)
     setUserId(null)
@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ userId, isLoggedIn, logIn, logOut }}>
+    <AuthContext.Provider value={{ user_id, isLoggedIn, logIn, logOut }}>
       {children}
     </AuthContext.Provider>
   );

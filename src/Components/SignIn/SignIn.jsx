@@ -16,12 +16,12 @@ function SignInForm() {
     const [login_error, setLoginError] = useState('');
     const [form_error, setFormError] = useState('');
     const [showPassword, setShowPassword] = useState(false)
-    const { logIn, isLoggedIn, userId } = useAuth()
+    const { logIn, isLoggedIn, user_id } = useAuth()
 
     console.log("Sign in page isLoggedIn", isLoggedIn)
 
     if (isLoggedIn) {
-        navigate(`${USER_MENU_URL}/${userId}`, {replace: true});
+        navigate(`${USER_MENU_URL}/${user_id}`, {replace: true});
     }
 
     const handleSubmit = (event) => {

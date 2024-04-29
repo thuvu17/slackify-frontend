@@ -10,7 +10,7 @@ const LOGGEDIN_PAGES = [
   { label: 'View All Songs', destination: '/songs' },
   { label: 'View All Users', destination: '/users' },
   //  { label: 'View Form', destination: '/form' },
-  // { label: 'View All Playlists', destination: '/playlists' },
+  { label: 'View All Playlists', destination: '/playlists' },
 ];
 
 const LOGGEDOUT_PAGES = [
@@ -35,14 +35,11 @@ NavLink.propTypes = {
 };
 
 function Navbar() {
-  const { isLoggedIn, userId } = useAuth()
+  const { isLoggedIn, user_id } = useAuth()
 
   if (isLoggedIn && !LOGGEDIN_PAGES.some((page) => (page.label === 'Profile'))) {
-    console.log('no copy')
-    LOGGEDIN_PAGES.push({ label: 'Profile', destination: `${USER_MENU_URL}/${userId}` });
+    LOGGEDIN_PAGES.push({ label: 'Profile', destination: `${USER_MENU_URL}/${user_id}` });
   }
-
-  console.log(LOGGEDIN_PAGES)
 
   const pagesToRender = isLoggedIn ? LOGGEDIN_PAGES : LOGGEDOUT_PAGES
 
