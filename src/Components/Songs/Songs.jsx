@@ -5,6 +5,7 @@ import { BACKEND_URL } from '../../constants';
 import Player from '../Player';
 
 const SONGS_EP = `${BACKEND_URL}/songs`;
+const TOKEN_EP = `${BACKEND_URL}/token`;
 
 
 function AddSongForm({
@@ -114,6 +115,7 @@ function Songs() {
   const [songs, setSongs] = useState([]);
   const [error, setError] = useState('');
   const [addingSong, setAddingSong] = useState(false);
+  const [token, setToken] = useState('');
   const showAddSongForm = () => { setAddingSong(true); };
   const hideAddSongForm = () => { setAddingSong(false); };
    
@@ -121,6 +123,12 @@ function Songs() {
     axios.get(SONGS_EP)
       .then(({ data }) => setSongs(SongsObjectToArray(data)))
       .catch(() => setError('There was a problem retrieving the list of Songs.'));
+  };
+
+  const fetchToken = () => {
+    axios.get(TOKEN_EP)
+      .then(({ data }) => setToken(data))
+      .catch(() => setError('There was a problem retrieving the token'));
   };
 
   useEffect(
@@ -150,6 +158,33 @@ function Songs() {
       [],
   );
 
+  useEffect(
+    () => {
+        axios.get(TOKEN_EP)
+            .then((response) => {
+                setToken(response.data);
+            })
+            .then()
+            .catch((error) => { 
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    console.error('Server Error:', error.response.data);
+                    setError('Server Error: ' + error.response.data.message); // Assuming the server sends error messages in a 'message' field
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    console.error('Network Error:', error.request);
+                    setError('Network Error: No response from server');
+                } else {
+                    // Something else happened while setting up the request
+                    console.error('Request Error:', error.message);
+                    setError('Request Error: ' + error.message);
+                }
+            });
+            
+    },
+    [],
+);
+
   return (
   <div className="wrapper">
     <h1>View All Songs</h1>
@@ -163,7 +198,7 @@ function Songs() {
       setError={setError}
     />
     <Player
-      accessToken="BQAI_7RWPJuqdZxS-I8XzhkUi9RKr8Q8UUNaJAHwWlpIq6..."
+      token={token}
       trackUri={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
     />
     {songs.map((song) => (
