@@ -35,12 +35,6 @@ function UserMenu() {
           <div className="userHome_title">Welcome, {userData.name}</div>
       <ul>
         <li>Email: {userData.email}</li>
-        <li>Playlist: {userData.playlists}</li>
-          <ul>
-            {userData.playlists.map((playlist, index) => (
-              <li key={index}>{playlist}</li>
-            ))}
-          </ul>
       </ul>
       <button type="submit" onClick={logOut}>Log Out</button>
 
