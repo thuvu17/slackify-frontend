@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { BACKEND_URL } from '../../constants';
 import axios from 'axios';
+import './UserHome.css';
 
 const USER_MENU_EP = `${BACKEND_URL}/user_menu`;
 
