@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { BACKEND_URL } from '../../constants';
+import { useAuth } from '../AuthProvider/AuthProvider';
 
 const USER_MENU_URL = '/user_menu';
 const FORM_EP = `${BACKEND_URL}/form`;
@@ -15,6 +16,13 @@ function SignInForm() {
     const [login_error, setLoginError] = useState('');
     const [form_error, setFormError] = useState('');
     const [showPassword, setShowPassword] = useState(false)
+    const { logIn, isLoggedIn, user_id } = useAuth()
+
+    console.log("Sign in page isLoggedIn", isLoggedIn)
+
+    if (isLoggedIn) {
+        navigate(`${USER_MENU_URL}/${user_id}`, {replace: true});
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -23,8 +31,7 @@ function SignInForm() {
         axios.get(`${SIGN_IN_EP}/${email}/${password}`)
             .then((response) => {
                 const user_id = response.data._id;
-                console.log(response);
-                window.localStorage.setItem("loggedIn", true);
+                logIn(user_id)
                 navigate(`${USER_MENU_URL}/${user_id}`, {replace: true});
             })  
             .catch(() => {
@@ -85,7 +92,7 @@ function SignInForm() {
         <button type="submit">Login</button>
         </form>
         <br />
-        <Link to="/create_account">Need to create an account?</Link>
+        <Link className={"link_styles"} to="/create_account">Need to create an account?</Link>
     </div>
     );
 }

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
+import Player from '../Player';
 
 const SONGS_EP = `${BACKEND_URL}/songs`;
+const TOKEN_EP = `${BACKEND_URL}/token`;
 
 
 function AddSongForm({
@@ -85,7 +87,7 @@ AddSongForm.propTypes = {
   cancel: propTypes.func.isRequired,
   fetchSongs: propTypes.func.isRequired,
   setError: propTypes.func.isRequired,
-  addSongResult: propTypes.string.isRequired,
+  addSongResult: propTypes.string,
 };
 
 
@@ -102,16 +104,18 @@ function ErrorMessage({ message }) {
         {message}
       </div>
     );
-  }
-  ErrorMessage.propTypes = {
-    message: propTypes.string.isRequired,
-  };
+}
+
+ErrorMessage.propTypes = {
+  message: propTypes.string.isRequired,
+};
 
 
 function Songs() {
   const [songs, setSongs] = useState([]);
   const [error, setError] = useState('');
   const [addingSong, setAddingSong] = useState(false);
+  const [token, setToken] = useState('');
   const showAddSongForm = () => { setAddingSong(true); };
   const hideAddSongForm = () => { setAddingSong(false); };
    
@@ -148,6 +152,33 @@ function Songs() {
       [],
   );
 
+  useEffect(
+    () => {
+        axios.get(TOKEN_EP)
+            .then((response) => {
+                setToken(response.data);
+            })
+            .then()
+            .catch((error) => { 
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    console.error('Server Error:', error.response.data);
+                    setError('Server Error: ' + error.response.data.message); // Assuming the server sends error messages in a 'message' field
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    console.error('Network Error:', error.request);
+                    setError('Network Error: No response from server');
+                } else {
+                    // Something else happened while setting up the request
+                    console.error('Request Error:', error.message);
+                    setError('Request Error: ' + error.message);
+                }
+            });
+            
+    },
+    [],
+);
+
   return (
   <div className="wrapper">
     <h1>View All Songs</h1>
@@ -159,6 +190,10 @@ function Songs() {
       cancel={hideAddSongForm}
       fetchSongs={fetchSongs}
       setError={setError}
+    />
+    <Player
+      token={token}
+      trackUri={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
     />
     {songs.map((song) => (
       <div className='song-container' key={song._id}>

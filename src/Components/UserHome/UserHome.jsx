@@ -1,22 +1,25 @@
 // UserMenu.jsx
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { BACKEND_URL } from '../../constants';
 import axios from 'axios';
+<<<<<<< HEAD
 import './UserHome.css';
+=======
+import { useAuth } from '../AuthProvider/AuthProvider';
+>>>>>>> 0341021c6372424003157b8be4d28b8c35497eb5
 
 const USER_MENU_EP = `${BACKEND_URL}/user_menu`;
 
 
 function UserMenu() {
-    const { userId } = useParams();
-    console.log(userId)
     const [userData, setUserData] = useState(null);
+    const { logOut, user_id } = useAuth()
 
     useEffect(() => {
         const fetchUserMenu = async () => {
             try {
-                const response = await axios.get(`${USER_MENU_EP}/${userId}`);
+                const response = await axios.get(`${USER_MENU_EP}/${user_id}`);
                 setUserData(response.data);
             } catch (error) {
                 console.error('Error fetching user menu:', error);
@@ -24,31 +27,21 @@ function UserMenu() {
         };
 
         fetchUserMenu();
-    }, [userId]);
+    }, [user_id]);
     
 
   if (!userData) {
     return <div>Loading...</div>;
   }
 
-  const logOut=()=>{
-    window.localStorage.clear();
-    window.location.href = "/sign_in";
-  }
-
   return (
     <div>
-          <div className="userHome_title">Welcome, User {userData.name}</div>
+          <div className="userHome_title">Welcome, {userData.name}</div>
       <ul>
         <li>Email: {userData.email}</li>
-        <li>Playlist: {userData.playlists}</li>
-          <ul>
-            {userData.playlists.map((playlist, index) => (
-              <li key={index}>{playlist}</li>
-            ))}
-          </ul>
       </ul>
       <button type="submit" onClick={logOut}>Log Out</button>
+
     </div>
   );
 }

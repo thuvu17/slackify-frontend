@@ -162,6 +162,7 @@ form button[type=button]:hover {
   margin: 1.5rem;
   padding:0.5rem;
 }
+
 nav {
   margin: 0;
   padding-top: 0.5rem;
@@ -221,7 +222,8 @@ nav a:focus {
 }
 
 .song-container,
-.user-container {
+.user-container,
+.playlist-container {
   border: 2px solid var(--accent-color);
   margin: 1rem 0;
   padding: 2rem;
@@ -230,14 +232,16 @@ nav a:focus {
 }
 
 .song-container p,
-.user-container p {
+.user-container p,
+.playlist-container p {
     margin-bottom: 2.0px;
     font-size: 1.25rem;
     margin-left: 1.5rem;
 }
 
 .song-container h2,
-.user-container h2 {
+.user-container h2,
+.playlist-container h2 {
     margin: 1.0px;
     font-size: 1.75rem;
 }
@@ -254,4 +258,15 @@ nav a:focus {
   font-weight: bold; 
   text-indent: 30px;
   line-height: 1;
+}
+
+.link_styles {
+  color: var(--off-white); 
+  text-decoration: none;
+}
+
+a.link_styles:hover {
+  background: var(--accent-color);
+  color: var(--background-color);
+  border-radius: 5px;
 }
