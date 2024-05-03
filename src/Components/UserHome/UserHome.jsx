@@ -3,11 +3,8 @@ import React, { useEffect, useState } from 'react';
 // import { useParams } from 'react-router-dom';
 import { BACKEND_URL } from '../../constants';
 import axios from 'axios';
-<<<<<<< HEAD
 import './UserHome.css';
-=======
 import { useAuth } from '../AuthProvider/AuthProvider';
->>>>>>> 0341021c6372424003157b8be4d28b8c35497eb5
 
 const USER_MENU_EP = `${BACKEND_URL}/user_menu`;
 
@@ -40,7 +37,9 @@ function UserMenu() {
       <ul>
         <li>Email: {userData.email}</li>
       </ul>
-      <button type="submit" onClick={logOut}>Log Out</button>
+      <div className="log_out_button">
+        <button type="submit" onClick={logOut}>Log Out</button>
+      </div>
 
     </div>
   );

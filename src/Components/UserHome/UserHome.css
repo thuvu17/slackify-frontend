@@ -224,3 +224,8 @@ nav a:focus {
   text-indent: 30px;
   line-height: 1;
 }
+
+.log_out_button {
+  display:inline-block;
+  margin-right: 2rem;
+}

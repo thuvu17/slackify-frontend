@@ -270,3 +270,8 @@ a.link_styles:hover {
   color: var(--background-color);
   border-radius: 5px;
 }
+
+.log_out_button {
+  display:inline-block;
+  margin-right: 2rem;
+}
