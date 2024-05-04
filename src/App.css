@@ -271,6 +271,11 @@ a.link_styles:hover {
   border-radius: 5px;
 }
 
+.sign_in_page {
+  display:inline-block;
+  margin-left: 2rem;
+}
+
 .del_button {
   width: 120px;
   align-self: flex-end;
