@@ -277,6 +277,7 @@ a.link_styles:hover {
 }
 
 .del_button {
-  width: 50;
+  width: 120px;
   align-self: flex-end;
+  margin-left:auto !important;
 }
