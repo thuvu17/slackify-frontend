@@ -271,11 +271,6 @@ a.link_styles:hover {
   border-radius: 5px;
 }
 
-.log_out_button {
-  display:inline-block;
-  margin-right: 2rem;
-}
-
 .del_button {
   width: 120px;
   align-self: flex-end;

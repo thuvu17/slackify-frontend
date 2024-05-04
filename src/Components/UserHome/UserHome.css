@@ -227,5 +227,6 @@ nav a:focus {
 
 .log_out_button {
   display:inline-block;
+  margin-left: 2rem;
   margin-right: 2rem;
 }
