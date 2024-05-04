@@ -275,3 +275,8 @@ a.link_styles:hover {
   display:inline-block;
   margin-right: 2rem;
 }
+
+.del_button {
+  width: 50;
+  align-self: flex-end;
+}
