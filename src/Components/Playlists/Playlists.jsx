@@ -15,27 +15,31 @@ function AddPlaylistForm({
   cancel,
   fetchPlaylists,
   setError,
+  setSuccessMsg,
 }) {
   const [name, setName] = useState('');
-  const [addPlaylistResult, setAddPlaylistResult] = useState('');
+  // const [addPlaylistResult, setAddPlaylistResult] = useState('');
   const { user_id } = useAuth()
 
   const changeName = (event) => { setName(event.target.value); };
-  const changeSucessMsg = () => { setAddPlaylistResult(`has been added to the database`); };
-  const changeFailMsg = () => { setAddPlaylistResult('There was a problem adding the playlist.'); };
+  // const changeSucessMsg = () => { setAddPlaylistResult(`has been added to the database`); };
+  // const changeFailMsg = () => { setAddPlaylistResult(`There is some issue adding the playlist`); };
 
   const addPlaylist = (event) => {
     event.preventDefault();
     axios.post(PLAYLISTS_EP, { user_id, name })
-      .then(
-        changeSucessMsg(),
+      .then(() => {
+        setSuccessMsg(`Successfully created playlist ${name}`);
         // Reset form fields
-        setName(''),
-        fetchPlaylists,
+        setName('');
+        fetchPlaylists(user_id);
+        }
       )
-      .catch(() => {
-        setError('There was a problem adding the playlist.');
-        changeFailMsg();
+      .catch(error => {
+        if (error.response) {
+          // console.error(error.response.data);
+          setError(error.response.data.message);
+        }
       });
   };
 
@@ -48,9 +52,9 @@ function AddPlaylistForm({
       <button type="button" onClick={cancel}>Cancel</button>
       <button type="submit" onClick={addPlaylist}>Submit</button>
 
-      <div className='add-playlist-result'>
+      {/* <div className='add-playlist-result'>
         <td>{ addPlaylistResult }</td>
-      </div>
+      </div> */}
 
     </form>
   );
@@ -87,6 +91,7 @@ ErrorMessage.propTypes = {
 function Playlists() {
   const [playlists, setPlaylists] = useState([]);
   const [error, setError] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
   const [addingPlaylist, setAddingPlaylist] = useState(false);
   const showAddPlaylistForm = () => { setAddingPlaylist(true); };
   const hideAddPlaylistForm = () => { setAddingPlaylist(false); };
@@ -98,12 +103,14 @@ function Playlists() {
       .catch(() => setError('There was a problem retrieving the list of playlists.'));
   };
 
-  const delPlaylist = (user_id) => {
-    axios.delete(`${DEL_PLAYLIST_EP}/${user_id}`)
+  const delPlaylist = (user_id, name) => {
+    axios.delete(`${DEL_PLAYLIST_EP}/${user_id}/${name}`)
     .then(() => {
+      setSuccessMsg(`Successfully deleted playlist ${name}`);
       // Refresh playlists after deletion
-      fetchPlaylists();
-    })
+      fetchPlaylists(user_id);
+    }
+    )
     .catch(() => {
       setError('There was a problem deleting the playlist.');
     });
@@ -147,16 +154,19 @@ function Playlists() {
       cancel={hideAddPlaylistForm}
       fetchPlaylists={fetchPlaylists}
       setError={setError}
+      setSuccessMsg={setSuccessMsg}
     />
+      {error && <ErrorMessage message={error} />}
+      {successMsg && <ErrorMessage message={successMsg} />}
           {playlists.map((playlist) => (
-              <div className='playlist-container' key={playlist._id}>
+              <div className='playlist-container' key={playlist.name}>
         <h2>{playlist.name}</h2>
           <p>Email: {playlist.date_created}</p>
           <p>Song: {playlist.song}</p>
-          <button className="del_button" onClick={() => delPlaylist(playlist._id)}>Delete</button>
+          <button className="del_button" onClick={() => delPlaylist(user_id, playlist.name)}>Delete</button>
       </div>
     ))}
-    {error && <ErrorMessage message={error} />}
+    
   </div>
   );
 }
