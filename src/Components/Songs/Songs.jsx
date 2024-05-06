@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
 import Player from '../Player';
+import { Form } from "react-bootstrap"
 
 const SONGS_EP = `${BACKEND_URL}/songs`;
 const TOKEN_EP = `${BACKEND_URL}/token`;
@@ -114,6 +115,7 @@ ErrorMessage.propTypes = {
 function Songs() {
   const [songs, setSongs] = useState([]);
   const [error, setError] = useState('');
+  const [search, setSearch] = useState("")
   const [addingSong, setAddingSong] = useState(false);
   const [token, setToken] = useState('');
   const showAddSongForm = () => { setAddingSong(true); };
@@ -156,6 +158,7 @@ function Songs() {
     () => {
         axios.get(TOKEN_EP)
             .then((response) => {
+                console.log(response)
                 setToken(response.data);
             })
             .then()
@@ -181,6 +184,12 @@ function Songs() {
 
   return (
   <div className="wrapper">
+      <Form.Control
+        type="search"
+        placeholder="Search Songs/Artists"
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+      />
     <h1>View All Songs</h1>
     <button type="button" onClick={showAddSongForm}>
       Add a Song
