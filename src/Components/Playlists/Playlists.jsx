@@ -7,6 +7,7 @@ import { useAuth } from '../AuthProvider/AuthProvider';
 
 const PLAYLISTS_EP = `${BACKEND_URL}/playlists`;
 const GET_PLAYLIST_EP = `${PLAYLISTS_EP}/get`;
+const DEL_PLAYLIST_EP = `${PLAYLISTS_EP}/delete`;
 
 
 function AddPlaylistForm({
@@ -97,6 +98,17 @@ function Playlists() {
       .catch(() => setError('There was a problem retrieving the list of playlists.'));
   };
 
+  const delPlaylist = (user_id) => {
+    axios.delete(`${DEL_PLAYLIST_EP}/${user_id}`)
+    .then(() => {
+      // Refresh playlists after deletion
+      fetchPlaylists();
+    })
+    .catch(() => {
+      setError('There was a problem deleting the playlist.');
+    });
+  }
+
   useEffect(
       () => {
           axios.get(`${GET_PLAYLIST_EP}/${user_id}`)
@@ -141,6 +153,7 @@ function Playlists() {
         <h2>{playlist.name}</h2>
           <p>Email: {playlist.date_created}</p>
           <p>Song: {playlist.song}</p>
+          <button className="del_button" onClick={() => delPlaylist(playlist._id)}>Delete</button>
       </div>
     ))}
     {error && <ErrorMessage message={error} />}
