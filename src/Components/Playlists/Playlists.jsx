@@ -91,7 +91,7 @@ function Playlists() {
   const [addingPlaylist, setAddingPlaylist] = useState(false);
   const showAddPlaylistForm = () => { setAddingPlaylist(true); };
   const hideAddPlaylistForm = () => { setAddingPlaylist(false); };
-  const { user_id, isAdmin } = useAuth()
+  const { user_id } = useAuth()
    
   const fetchPlaylists = (user_id) => {
     axios.get(`${GET_PLAYLIST_EP}/${user_id}`)
@@ -141,17 +141,17 @@ function Playlists() {
   return (
   <div className="wrapper">
     <h1>View All Playlists</h1>
-    { isAdmin && <button type="button" onClick={showAddPlaylistForm}>
+    <button type="button" onClick={showAddPlaylistForm}>
       Add a Playlist
-    </button> }
+    </button>
 
-    { isAdmin && <AddPlaylistForm
+    <AddPlaylistForm
       visible={addingPlaylist}
       cancel={hideAddPlaylistForm}
       fetchPlaylists={fetchPlaylists}
       setError={setError}
       setSuccessMsg={setSuccessMsg}
-    /> }
+    />
       {error && <ErrorMessage message={error} />}
       {successMsg && <ErrorMessage message={successMsg} />}
           {playlists.map((playlist) => (
