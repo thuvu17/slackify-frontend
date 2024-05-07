@@ -33,11 +33,11 @@ function UserMenu() {
 
   return (
     <div>
-          <div className="userHome_title">Welcome, {userData.name}</div>
+          <div className="userHome-title">Welcome, {userData.name}</div>
       <ul>
         <li>Email: {userData.email}</li>
       </ul>
-      <div className="log_out_button">
+      <div className="log-out-button">
         <button type="submit" onClick={logOut}>Log Out</button>
       </div>
 

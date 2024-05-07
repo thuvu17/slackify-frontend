@@ -131,6 +131,7 @@ form button[type=button]:hover {
   margin: 1.5rem;
   padding:0.5rem;
 }
+
 nav {
   margin: 0;
   padding-top: 0.5rem;
@@ -216,7 +217,7 @@ nav a:focus {
   font-size: 1.0rem;
 }
 
-.userHome_title {
+.userHome-title {
   color: var(--off-white); 
   font-family: 'Lato', sans-serif; 
   font-size: 35px; 
@@ -225,7 +226,7 @@ nav a:focus {
   line-height: 1;
 }
 
-.log_out_button {
+.log-out-button {
   display:inline-block;
   margin-left: 2rem;
   margin-right: 2rem;

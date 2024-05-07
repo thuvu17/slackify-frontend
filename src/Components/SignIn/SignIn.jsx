@@ -67,7 +67,7 @@ function SignInForm() {
 
 
     return (
-    <div className="sign_in_page">
+    <div className="sign-in-page">
         <h2>Sign In Page</h2>
         <form onSubmit={handleSubmit}>
             {Object.entries(formData).map(([key, value]) => (
@@ -89,10 +89,10 @@ function SignInForm() {
                 {form_error && <div style={{ color: 'red' }}>{form_error}</div>}
                 {login_error && <div style={{ color: 'red' }}>{login_error}</div>}
                 
-        <button className="log_in_button" type="submit">Login</button>
+        <button className="log-in-button" type="submit">Login</button>
         </form>
         <br />
-        <Link className={"link_styles"} to="/create_account">Need to create an account?</Link>
+        <Link className={"link-styles"} to="/create_account">Need to create an account?</Link>
     </div>
     );
 }

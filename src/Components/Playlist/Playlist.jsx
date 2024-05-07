@@ -90,7 +90,7 @@ function Playlist() {
     <h1>{thisName}</h1>
     <div className='playlist-header'>
       <h3>Date Created: {thisDate}</h3>
-      <button className="del_button" onClick={() => delPlaylist(user_id, thisName)}>Delete</button>
+      <button className="del-button" onClick={() => delPlaylist(user_id, thisName)}>Delete</button>
     </div>
 
     

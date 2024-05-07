@@ -3,8 +3,8 @@ import React from "react";
 function Home() {
     return (
        <>
-          <div className="home_title">View Our Songs</div>
-          <div className="home_body" style={{
+          <div className="home-title">View Our Songs</div>
+          <div className="home-body" style={{
              textAlign: 'center', color: 'white',
              fontSize: 20,
           }}>
