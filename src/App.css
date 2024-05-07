@@ -46,6 +46,7 @@ li {
   color: var(--off-white);
   text-align: center;
   font-weight: bold;
+  margin-top: 1rem;
 }
 
 .photo {
@@ -311,6 +312,7 @@ a.link-styles:hover {
 }
 
 .return-button {
+  margin-top: 1rem;
   line-height: 24px;
   border: none;
   background: none;
