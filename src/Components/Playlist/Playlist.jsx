@@ -67,15 +67,19 @@ function Playlist() {
   <div className="wrapper">
     <h1>{thisName}</h1>
     <h3>Date Created: {thisDate}</h3>
-    {songs.map((song) => (
-      <div className='song-container' key={song._id}>
-        <h2>{song.name}</h2>
-          <p>Aritst: {song.artist}</p>
-          <p>Album: {song.album}</p>
-          <p>Energy: {song.energy}</p>
-          <p>BPM: {song.bpm}</p>
+    {songs.length === 0 ? (
+      <p>No songs found in this playlist.</p>
+    ):(
+      songs.map((song) => (
+        <div className='song-container' key={song._id}>
+          <h2>{song.name}</h2>
+            <p>Aritst: {song.artist}</p>
+            <p>Album: {song.album}</p>
+            <p>Energy: {song.energy}</p>
+            <p>BPM: {song.bpm}</p>
       </div>
-    ))}
+    ))
+  )}
     {error && <ErrorMessage message={error} />}
   </div>
   );
