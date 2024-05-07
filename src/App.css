@@ -302,5 +302,47 @@ a.link-styles:hover {
 
 .playlist-header {
   display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.playlist-subheader {
+  display: flex;
   justify-content: space-between;
+}
+
+.playlist-name-button {
+  border: none;
+  background:url('../public/edit.png') no-repeat;
+  background-size: 20px;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.changeNameForm {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 42.67px;
+  margin-block-end: 21.44px;
+  margin-block-start: 21.44px;
+  margin-inline-end: 0px;
+  margin-inline-start: 0px;
+}
+.changeNameForm button {
+  width: 70px;
+  height: 30px;
+  margin-left: 20px;
+  margin-right: 0px;
+  padding: 0px;
+  font-size: 15px;
+  text-align: center;
+  vertical-align:middle;
+}
+
+.name-input {
+ height: 43px;
+ font-size: 28px;
+ max-width: 150px;
 }
