@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import propTypes from 'prop-types';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
@@ -7,7 +8,9 @@ import { Form } from "react-bootstrap"
 import { useAuth } from '../AuthProvider/AuthProvider';
 
 const SONGS_EP = `${BACKEND_URL}/songs`;
+const DELETE_SONGS_EP = `${SONGS_EP}/delete`;
 const TOKEN_EP = `${BACKEND_URL}/token`;
+const SONGS_URL = '/songs';
 
 
 function AddSongForm({
@@ -15,43 +18,41 @@ function AddSongForm({
   cancel,
   fetchSongs,
   setError,
+  setSuccessMsg,
 }) {
   const [name, setName] = useState('');
   const [artist, setArtist] = useState('');
   const [album, setAlbum] = useState('');
   const [energy, setEnergy] = useState(0);
   const [bpm, setBPM] = useState(0);
-  const [addSongResult, setAddSongResult] = useState('');
 
   const changeName = (event) => { setName(event.target.value); };
   const changeArtist = (event) => { setArtist(event.target.value); };
   const changeAlbum = (event) => { setAlbum(event.target.value); };
   const changeEnergy = (event) => { setEnergy(event.target.value); };
   const changeBPM = (event) => { setBPM(event.target.value); };
-  const changeSucessMsg = () => { setAddSongResult(`${name} by ${artist} has been added to the database`); };
-  const changeFailMsg = () => { setAddSongResult('There was a problem adding the song.'); };
   // Get error msg from backend
 
   const addSong = (event) => {
     event.preventDefault();
     axios.post(SONGS_EP, { name, artist, album, energy, bpm })
-      .then(
-        changeSucessMsg(),
+      .then(() => {
+        setSuccessMsg(`${name} by ${artist} has been added to the database`);
+        setError('');
         // Reset form fields
-        setName(''),
-        setArtist(''),
-        setAlbum(''),
-        setEnergy(0),
-        setBPM(0),
-        fetchSongs,
+        setName('');
+        setArtist('');
+        setAlbum('');
+        setEnergy(0);
+        setBPM(0);
+        fetchSongs();
+      }
       )
     .catch(error => {
         if (error.response) {
           console.error(error.response.data);
           setError(error.response.data.message);
-        } else {
-          // Something else happened while setting up the request
-          changeFailMsg();
+          setSuccessMsg('');
         }
       });
     };
@@ -77,10 +78,6 @@ function AddSongForm({
       <button type="button" onClick={cancel}>Cancel</button>
       <button type="submit" onClick={addSong}>Submit</button>
 
-      <div className='add-song-result'>
-        <td>{ addSongResult }</td>
-      </div>
-
     </form>
   );
 }
@@ -89,7 +86,7 @@ AddSongForm.propTypes = {
   cancel: propTypes.func.isRequired,
   fetchSongs: propTypes.func.isRequired,
   setError: propTypes.func.isRequired,
-  addSongResult: propTypes.string,
+  setSuccessMsg: propTypes.func.isRequired,
 };
 
 
@@ -118,12 +115,18 @@ ErrorMessage.propTypes = {
 function Songs() {
   const [songs, setSongs] = useState([]);
   const [error, setError] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
   const [search, setSearch] = useState("")
   const [addingSong, setAddingSong] = useState(false);
   const [token, setToken] = useState('');
   const showAddSongForm = () => { setAddingSong(true); };
-  const hideAddSongForm = () => { setAddingSong(false); };
+  const hideAddSongForm = () => { 
+    setAddingSong(false);
+    setError('');
+    setSuccessMsg('');
+  };
   const { isAdmin } = useAuth()
+  const navigate = useNavigate();
    
   const fetchSongs = () => {
     axios.get(SONGS_EP)
@@ -186,6 +189,19 @@ function Songs() {
     [],
 );
 
+const delSong = (name, artist) => {
+  axios.delete(`${DELETE_SONGS_EP}/${name}/${artist}`)
+  .then(() => {
+    navigate(`${SONGS_URL}`, {replace: true});
+    fetchSongs();
+    setSuccessMsg(`${name} by ${artist} has been deleted`);
+  }
+  )
+  .catch(() => {
+    setError('There was a problem deleting the playlist.');
+  });
+}
+
   return (
   <div className="wrapper">
       <Form.Control
@@ -206,7 +222,11 @@ function Songs() {
       cancel={hideAddSongForm}
       fetchSongs={fetchSongs}
       setError={setError}
+      setSuccessMsg={setSuccessMsg}
     /> }
+
+    {isAdmin && error && <ErrorMessage message={error} />}
+    {isAdmin && successMsg && <ErrorMessage message={successMsg} />}
 
     <Player
       token={token}
@@ -215,13 +235,18 @@ function Songs() {
     {songs.map((song) => (
       <div className='song-container' key={song._id}>
         <h2>{song.name}</h2>
-          <p>Aritst: {song.artist}</p>
-          <p>Album: {song.album}</p>
-          <p>Energy: {song.energy}</p>
-          <p>BPM: {song.bpm}</p>
+          <div className='user-subcontainer'>
+            <div>
+              <p>Aritst: {song.artist}</p>
+              <p>Album: {song.album}</p>
+              <p>Energy: {song.energy}</p>
+              <p>BPM: {song.bpm}</p>
+            </div>
+            <button className="del-button" onClick={() => delSong(song.name, song.artist)}>Delete</button>
+          </div>
       </div>
     ))}
-    {error && <ErrorMessage message={error} />}
+    
   </div>
   );
 }

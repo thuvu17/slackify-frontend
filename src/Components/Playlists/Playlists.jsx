@@ -32,12 +32,14 @@ function AddPlaylistForm({
         // Reset form fields
         setName('');
         fetchPlaylists(user_id);
+        setError('');
         }
       )
       .catch(error => {
         if (error.response) {
           // console.error(error.response.data);
           setError(error.response.data.message);
+          setSuccessMsg('');
         }
       });
   };
@@ -59,7 +61,7 @@ AddPlaylistForm.propTypes = {
   cancel: propTypes.func.isRequired,
   fetchPlaylists: propTypes.func.isRequired,
   setError: propTypes.func.isRequired,
-  addPlaylistResult: propTypes.string,
+  setSuccessMsg: propTypes.func.isRequired,
 };
 
 
@@ -89,7 +91,11 @@ function Playlists() {
   const [successMsg, setSuccessMsg] = useState('');
   const [addingPlaylist, setAddingPlaylist] = useState(false);
   const showAddPlaylistForm = () => { setAddingPlaylist(true); };
-  const hideAddPlaylistForm = () => { setAddingPlaylist(false); };
+  const hideAddPlaylistForm = () => { 
+    setAddingPlaylist(false); 
+    setError('');
+    setSuccessMsg('');
+  };
   const { user_id } = useAuth();
   const navigate = useNavigate();
    

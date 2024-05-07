@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import propTypes from 'prop-types';
 import axios from 'axios';
 
@@ -6,6 +7,8 @@ import { BACKEND_URL } from '../../constants';
 import { useAuth } from '../AuthProvider/AuthProvider';
 
 const USERS_EP = `${BACKEND_URL}/users`;
+const DELETE_USERS_EP = `${BACKEND_URL}/users/delete`;
+const USERS_URL = '/users';
 
 
 function AddUserForm({
@@ -13,32 +16,34 @@ function AddUserForm({
   cancel,
   fetchUsers,
   setError,
+  setSuccessMsg,
 }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [addUserResult, setAddUserResult] = useState('');
 
   const changeName = (event) => { setName(event.target.value); };
   const changeEmail = (event) => { setEmail(event.target.value); };
   const changePassword = (event) => { setPassword(event.target.value); };
-  const changeSucessMsg = () => { setAddUserResult(`${name} by ${email} has been added to the database`); };
-  const changeFailMsg = () => { setAddUserResult('There was a problem adding the user.'); };
 
   const addUser = (event) => {
     event.preventDefault();
     axios.post(USERS_EP, { name, email, password })
-      .then(
-        changeSucessMsg(),
+      .then(() => {
+        setSuccessMsg(`Successfully added user ${email}`);
         // Reset form fields
-        setName(''),
-        setEmail(''),
-        setPassword(''),
-        fetchUsers,
-      )
-      .catch(() => {
-        setError('There was a problem adding the user.');
-        changeFailMsg();
+        setName('');
+        setEmail('');
+        setPassword('');
+        fetchUsers();
+        setError('');
+      })
+      .catch(error => {
+        if (error.response) {
+          // console.error(error.response.data);
+          setSuccessMsg('');
+          setError(error.response.data.message);
+        }
       });
   };
 
@@ -49,17 +54,13 @@ function AddUserForm({
       <input required type="text" id="name" value={name} onChange={changeName} />
 
       <label htmlFor="email">Email</label>
-      <input required type="text" id="email" value={email} onChange={changeEmail} />
+      <input required type="email" id="email" value={email} onChange={changeEmail} />
 
       <label htmlFor="password">Password</label>
       <input required type="text" id="password" value={password} onChange={changePassword} />
 
       <button type="button" onClick={cancel}>Cancel</button>
       <button type="submit" onClick={addUser}>Submit</button>
-
-      <div className='add-user-result'>
-        <td>{ addUserResult }</td>
-      </div>
 
     </form>
   );
@@ -69,7 +70,7 @@ AddUserForm.propTypes = {
   cancel: propTypes.func.isRequired,
   fetchUsers: propTypes.func.isRequired,
   setError: propTypes.func.isRequired,
-  addUserResult: propTypes.string.isRequired,
+  setSuccessMsg: propTypes.func.isRequired,
 };
 
 
@@ -95,16 +96,36 @@ function ErrorMessage({ message }) {
 function Users() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
   const [addingUser, setAddingUser] = useState(false);
   const showAddUserForm = () => { setAddingUser(true); };
-  const hideAddUserForm = () => { setAddingUser(false); };
+  const hideAddUserForm = () => { 
+    setAddingUser(false);
+    setError('');
+    setSuccessMsg('');
+  };
   const { isAdmin } = useAuth();
-   
+  const navigate = useNavigate();
+
+  if (isAdmin) {
   const fetchUsers = () => {
     axios.get(USERS_EP)
       .then(({ data }) => setUsers(UsersObjectToArray(data)))
       .catch(() => setError('There was a problem retrieving the list of Users.'));
   };
+
+  const delUser = (email) => {
+    axios.delete(`${DELETE_USERS_EP}/${email}`)
+    .then(() => {
+      navigate(`${USERS_URL}`, {replace: true});
+      window.location.reload();
+    }
+    )
+    .catch(() => {
+      setError('There was a problem deleting the playlist.');
+    });
+  }
+
 
   useEffect(
       () => {
@@ -132,7 +153,7 @@ function Users() {
       },
       [],
   );
-  if (isAdmin) {
+  
     return (
     <div className="wrapper">
       <h1>View All Users</h1>
@@ -144,18 +165,26 @@ function Users() {
         cancel={hideAddUserForm}
         fetchUsers={fetchUsers}
         setError={setError}
+        setSuccessMsg={setSuccessMsg}
       />
-            {users.map((user) => (
-                <div className='user-container' key={user._id}>
+      {error && <ErrorMessage message={error} />}
+      {successMsg && <ErrorMessage message={successMsg} />}
+      {users.map((user) => (
+        <div className='user-container' key={user._id}>
           <h2>{user.name}</h2>
-            <p>Email: {user.email}</p>
-            <p>Password: {user.password}</p>
+          <div className='user-subcontainer'>
+            <div>
+              <p>Email: {user.email}</p>
+              <p>Password: {user.password}</p>
+            </div>
+            <button className="del-button" onClick={() => delUser(user.email)}>Delete</button>
+          </div>
         </div>
       ))}
-      {error && <ErrorMessage message={error} />}
+      
     </div>
     );
-  }else {
+  } else {
     return(
     <h1>Access Denied</h1>
   );
