@@ -160,7 +160,7 @@ function Playlists() {
       {successMsg && <ErrorMessage message={successMsg} />}
           {playlists.map((playlist) => (
             <div className='playlist-container' key={playlist.name} onClick={() => viewPlaylist(user_id, playlist.name)}>
-              <h2>{playlist.name}</h2>
+              <h2 className='playlist-name'>{playlist.name}</h2>
               <p>Date Created: {playlist.date_created}</p>
               <button className="del_button" onClick={() => delPlaylist(user_id, playlist.name)}>Delete</button>
             </div>

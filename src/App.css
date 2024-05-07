@@ -281,3 +281,16 @@ a.link_styles:hover {
   align-self: flex-end;
   margin-left:auto !important;
 }
+
+.playlist-name {
+  line-height: 24px;
+}
+
+.playlist-name:hover{
+  font-size: 2rem;
+  color: var(--cambridge-blue);
+}
+
+.wrapper h3 {
+  color: var(--off-white);
+}
