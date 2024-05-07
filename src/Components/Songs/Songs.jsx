@@ -235,7 +235,7 @@ const delSong = (name, artist) => {
     {songs.map((song) => (
       <div className='song-container' key={song._id}>
         <h2>{song.name}</h2>
-          <div className='user-subcontainer'>
+          <div className='song-subcontainer'>
             <div>
               <p>Aritst: {song.artist}</p>
               <p>Album: {song.album}</p>

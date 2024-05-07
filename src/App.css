@@ -249,7 +249,8 @@ nav a:focus {
     font-size: 1.75rem;
 }
 
-.user-subcontainer {
+.user-subcontainer,
+.song-subcontainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
