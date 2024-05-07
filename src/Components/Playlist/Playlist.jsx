@@ -72,13 +72,14 @@ function Playlist() {
   
   return (
   <div className="wrapper">
+    <div><button className='return-button' onClick={handleReturn}>	&lt; Return</button></div>
     <h1>{thisName}</h1>
     <h3>Date Created: {thisDate}</h3>
     {songs.length === 0 ? (
       <p>No songs found in this playlist.</p>
     ):(
       songs.map((song) => (
-        <div className='song-container' key={song._id}>
+        <div className='playlist-song-container' key={song._id}>
           <h2>{song.name}</h2>
             <p>Aritst: {song.artist}</p>
             <p>Album: {song.album}</p>
@@ -88,7 +89,7 @@ function Playlist() {
     ))
   )}
     {error && <ErrorMessage message={error} />}
-    <button onClick={handleReturn}>Return</button>
+    
   </div>
   );
 }

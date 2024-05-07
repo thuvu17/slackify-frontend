@@ -222,6 +222,7 @@ nav a:focus {
 }
 
 .song-container,
+.playlist-song-container,
 .user-container,
 .playlist-container {
   border: 2px solid var(--accent-color);
@@ -232,6 +233,7 @@ nav a:focus {
 }
 
 .song-container p,
+.playlist-song-container p,
 .user-container p,
 .playlist-container p {
     margin-bottom: 2.0px;
@@ -240,6 +242,7 @@ nav a:focus {
 }
 
 .song-container h2,
+.playlist-song-container h2,
 .user-container h2,
 .playlist-container h2 {
     margin: 1.0px;
@@ -282,13 +285,15 @@ a.link_styles:hover {
   margin-left:auto !important;
 }
 
-.playlist-name {
+.return-button {
   line-height: 24px;
+  border: none;
+  background: none;
 }
 
-.playlist-name:hover{
+.playlist-container:hover{
   font-size: 2rem;
-  color: var(--cambridge-blue);
+  background: var(--cambridge-blue);opacity:0.8;
 }
 
 .wrapper h3 {
