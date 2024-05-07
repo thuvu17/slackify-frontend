@@ -6,8 +6,8 @@ import { BACKEND_URL } from '../../constants';
 import Player from '../Player';
 import { Form } from "react-bootstrap"
 import { useAuth } from '../AuthProvider/AuthProvider';
-// for pop-up window
-import Popup from 'reactjs-popup';
+import AddToPlaylistPopup from '../AddToPlaylistPopup/AddToPlaylistPopup';
+
 
 const SONGS_EP = `${BACKEND_URL}/songs`;
 const DELETE_SONGS_EP = `${SONGS_EP}/delete`;
@@ -92,44 +92,12 @@ AddSongForm.propTypes = {
 };
 
 
-function AddToPlaylistPopup({
-  name,
-  artist,
-}) {
-  const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
-
-
-  return (
-    <div>
-      <button type="button" className="button" onClick={() => setOpen(o => !o)}>
-        Add to Playlist
-      </button>
-      <Popup open={open} closeOnDocumentClick onClose={closeModal} id='popup-box'>
-        <div className="modal">
-          <div className="close">
-            <a  onClick={closeModal}>
-            &times;</a>
-          </div>
-          <div className='popup-text'>
-            <h3>Add the Song to Playlist</h3>
-            <p><strong>Song Name:</strong> {name}</p>
-            <p><strong>Song Artist:</strong> {artist}</p>
-          </div>
-        </div>
-        <div className='popup-buttons'>
-          <button type="submit" >Submit</button>
-          <button type="button" onClick={closeModal}>Cancel</button>
-        </div>
-      </Popup>
-    </div>
-  );
-}
-
 
 function SongsObjectToArray({ Data }) {
+  console.log(Data)
   const keys = Object.keys(Data);
   const Songs = keys.map((key) => Data[key]);
+  console.log(Songs)
   return Songs;
 }
 
@@ -174,6 +142,7 @@ function Songs() {
       () => {
           axios.get(SONGS_EP)
               .then((response) => {
+                console.log(response.data)
                   setSongs(SongsObjectToArray(response.data));
               })
               .then()
@@ -281,6 +250,7 @@ const delSong = (name, artist) => {
               <AddToPlaylistPopup
                 name={song.name}
                 artist={song.artist}
+                song_id={song._id}
               />
               <button className="del-button" onClick={() => delSong(song.name, song.artist)}>Delete</button>
             </div>
