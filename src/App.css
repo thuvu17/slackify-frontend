@@ -73,7 +73,6 @@ li {
   float: left;
   padding: 0.5rem 1rem;
   margin-left: 1rem;
-  position: absolute;
 }
 
 .title:hover{
@@ -173,13 +172,19 @@ nav {
   margin: 0;
   padding-top: 0.5rem;
   background-color: var(--accent-color);
+  display: flex;
+  justify-content: space-between;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 2rem;
+  justify-content: space-evenly;
+  margin-right: 1vw;
+  margin-top: 0px;
+  margin-bottom: 0px;
   padding: 0;
+  align-items: end;
 }
 
 nav a {
@@ -262,9 +267,12 @@ nav a:focus {
   align-items: center;
 }
 
-.add-song-result {
-  font-style: italic;
-  font-size: 1.0rem;
+.song-buttons {
+  height: 100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: end;
 }
 
 .userHome-title {
@@ -381,9 +389,9 @@ a.link-styles:hover {
   z-index: 2;
   display: table;
   width: calc(100vw - 20rem);
-  height: calc(100vh - 2rem);
-  max-width: calc(100vw - 2rem);
-  max-height: calc(100vh - 2rem);
+  height: calc(100vh - 10rem);
+  max-width: calc(100vw - 5rem);
+  max-height: calc(100vh - 5rem);
   background-color: var(--off-white);
   border-radius: 15px;
   padding: 10px;
@@ -395,9 +403,6 @@ a.link-styles:hover {
 .popup-text {
   padding-left: 10px;
   padding-right: 10px;
-  /* overflow-y: auto;
-  outline: none; */
-
 }
 
 .popup-content h3 {

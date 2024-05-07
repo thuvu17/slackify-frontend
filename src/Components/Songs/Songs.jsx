@@ -4,7 +4,6 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
 import Player from '../Player';
-import { Form } from "react-bootstrap"
 import { useAuth } from '../AuthProvider/AuthProvider';
 import AddToPlaylistPopup from '../AddToPlaylistPopup/AddToPlaylistPopup';
 
@@ -119,7 +118,6 @@ function Songs() {
   const [songs, setSongs] = useState([]);
   const [error, setError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
-  const [search, setSearch] = useState("")
   const [addingSong, setAddingSong] = useState(false);
   const [token, setToken] = useState('');
   const showAddSongForm = () => { setAddingSong(true); };
@@ -208,12 +206,6 @@ const delSong = (name, artist) => {
 
   return (
   <div className="wrapper">
-      <Form.Control
-        type="search"
-        placeholder="Search Songs/Artists"
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-      />
     <h1>View All Songs</h1>
 
     { isAdmin &&
@@ -246,7 +238,7 @@ const delSong = (name, artist) => {
               <p>Energy: {song.energy}</p>
               <p>BPM: {song.bpm}</p>
             </div>
-            <div>
+            <div className='song-buttons'>
               <AddToPlaylistPopup
                 name={song.name}
                 artist={song.artist}

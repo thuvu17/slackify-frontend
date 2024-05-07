@@ -212,11 +212,6 @@ nav a:focus {
     font-size: 1.75rem;
 }
 
-.add-song-result {
-  font-style: italic;
-  font-size: 1.0rem;
-}
-
 .userHome-title {
   color: var(--off-white); 
   font-family: 'Lato', sans-serif; 

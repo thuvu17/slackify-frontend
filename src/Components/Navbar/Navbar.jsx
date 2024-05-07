@@ -9,8 +9,8 @@ const HOME_URL = '/';
 
 const USER_PAGES = [
   { label: 'Home', destination: '/' },
-  { label: 'View All Songs', destination: '/songs' },
-  { label: 'View All Playlists', destination: '/playlists' },
+  { label: 'Explore Songs', destination: '/songs' },
+  { label: 'My Playlists', destination: '/playlists' },
 ];
 
 const ADMIN_PAGES = [
@@ -62,7 +62,7 @@ function Navbar() {
       <>
       <nav>
         <button className='title' onClick={handleClick}>Slackify</button>
-        <ul className="wrapper">
+        <ul className="navbar">
           {pagesToRender.map((page) => <NavLink key={page.destination} page={page}/>)}
         </ul>
       </nav>
