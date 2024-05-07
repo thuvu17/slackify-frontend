@@ -99,8 +99,8 @@ function Playlists() {
       .catch(() => setError('There was a problem retrieving the list of playlists.'));
   };
 
-  const viewPlaylist = (user_id, name) => {
-    navigate(`${PLAYLIST_URL}/${user_id}/${name}`, {replace: true});
+  const viewPlaylist = (this_user_id, name) => {
+    navigate(`${PLAYLIST_URL}/${this_user_id}/${name}`, {replace: true});
   }
 
   useEffect(

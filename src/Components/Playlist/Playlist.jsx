@@ -84,7 +84,11 @@ function Playlist() {
   const [thisName, setName] = useState('');
   const [thisDate, setDate] = useState('');
   const [error, setError] = useState('');
-  const { user_id, name } = useParams();
+  const params = useParams();
+  console.log(params)
+  const this_user_id = useState(params.user_id)[0]
+  const name = useState(params.name)[0]
+  const { user_id } = useAuth();
   const navigate = useNavigate();
   const [changingName, setChangingName] = useState(false);
   const showChangeNameForm = () => { setChangingName(true); };
@@ -92,7 +96,8 @@ function Playlist() {
     setChangingName(false); 
     setError('');
   };
-   
+
+  if (this_user_id === user_id) {
   useEffect(
     () => {
         axios.get(`${PLAYLIST_EP}/${user_id}/${name}`)
@@ -161,10 +166,8 @@ function Playlist() {
     </div>
 
     {error && <ErrorMessage message={error} />}
-    {songs.length === 0 ? (
-      <p>There is no song in the playlist. Go add one now.</p>
-    ):(
-      songs.map((song) => (
+    { songs.length === 0 ? (<p>There is no song in the playlist. Go add one now.</p>)
+    : (songs.map((song) => (
         <div className='playlist-song-container' key={song._id}>
           <h2>{song.name}</h2>
             <p>Aritst: {song.artist}</p>
@@ -172,12 +175,14 @@ function Playlist() {
             <p>Energy: {song.energy}</p>
             <p>BPM: {song.bpm}</p>
       </div>
-    ))
-  )}
-    
-    
+    )))}
   </div>
   );
+  } else {
+    return(
+      <h1>Access Denied</h1>
+    );
+  }
 }
 
 export default Playlist;
