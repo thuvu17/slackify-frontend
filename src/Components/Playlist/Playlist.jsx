@@ -7,6 +7,8 @@ import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
 
 const PLAYLIST_EP = `${BACKEND_URL}/playlist`;
+const PLAYLISTS_EP = `${BACKEND_URL}/playlists`;
+const DEL_PLAYLIST_EP = `${PLAYLISTS_EP}/delete`;
 const PLAYLISTS_URL = '/playlists';
 
 function SongsObjectToArray(Data) {
@@ -69,12 +71,29 @@ function Playlist() {
   const handleReturn = () => {
     navigate(`${PLAYLISTS_URL}`);
   };
+
+
+  const delPlaylist = (user_id, name) => {
+    axios.delete(`${DEL_PLAYLIST_EP}/${user_id}/${name}`)
+    .then(() => {
+      navigate(`${PLAYLISTS_URL}`);
+    }
+    )
+    .catch(() => {
+      setError('There was a problem deleting the playlist.');
+    });
+  }
   
   return (
   <div className="wrapper">
     <div><button className='return-button' onClick={handleReturn}>	&lt; Return</button></div>
     <h1>{thisName}</h1>
-    <h3>Date Created: {thisDate}</h3>
+    <div className='playlist-header'>
+      <h3>Date Created: {thisDate}</h3>
+      <button className="del_button" onClick={() => delPlaylist(user_id, thisName)}>Delete</button>
+    </div>
+
+    
     {songs.length === 0 ? (
       <p>No songs found in this playlist.</p>
     ):(

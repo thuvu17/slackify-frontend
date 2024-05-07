@@ -8,7 +8,7 @@ import { useAuth } from '../AuthProvider/AuthProvider';
 
 const PLAYLISTS_EP = `${BACKEND_URL}/playlists`;
 const GET_PLAYLIST_EP = `${PLAYLISTS_EP}/get`;
-const DEL_PLAYLIST_EP = `${PLAYLISTS_EP}/delete`;
+
 
 const PLAYLIST_URL = '/playlist';
 
@@ -99,19 +99,6 @@ function Playlists() {
       .catch(() => setError('There was a problem retrieving the list of playlists.'));
   };
 
-  const delPlaylist = (user_id, name) => {
-    axios.delete(`${DEL_PLAYLIST_EP}/${user_id}/${name}`)
-    .then(() => {
-      setSuccessMsg(`Successfully deleted playlist ${name}`);
-      // Refresh playlists after deletion
-      fetchPlaylists(user_id);
-    }
-    )
-    .catch(() => {
-      setError('There was a problem deleting the playlist.');
-    });
-  }
-
   const viewPlaylist = (user_id, name) => {
     navigate(`${PLAYLIST_URL}/${user_id}/${name}`, {replace: true});
   }
@@ -162,7 +149,6 @@ function Playlists() {
             <div className='playlist-container' key={playlist.name} onClick={() => viewPlaylist(user_id, playlist.name)}>
               <h2>{playlist.name}</h2>
               <p>Date Created: {playlist.date_created}</p>
-              <button className="del_button" onClick={() => delPlaylist(user_id, playlist.name)}>Delete</button>
             </div>
     ))}
     

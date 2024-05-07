@@ -299,3 +299,8 @@ a.link_styles:hover {
 .wrapper h3 {
   color: var(--off-white);
 }
+
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+}
