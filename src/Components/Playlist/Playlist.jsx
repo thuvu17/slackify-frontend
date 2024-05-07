@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import propTypes from 'prop-types';
 import axios from 'axios';
 
 import { BACKEND_URL } from '../../constants';
 
 const PLAYLIST_EP = `${BACKEND_URL}/playlist`;
+const PLAYLISTS_URL = '/playlists';
 
 function SongsObjectToArray(Data) {
   const keys = Object.keys(Data);
@@ -33,6 +35,7 @@ function Playlist() {
   const [thisDate, setDate] = useState('');
   const [error, setError] = useState('');
   const { user_id, name } = useParams();
+  const navigate = useNavigate();
    
   useEffect(
     () => {
@@ -63,6 +66,10 @@ function Playlist() {
     [],
 );
 
+  const handleReturn = () => {
+    navigate(`${PLAYLISTS_URL}`);
+  };
+  
   return (
   <div className="wrapper">
     <h1>{thisName}</h1>
@@ -81,6 +88,7 @@ function Playlist() {
     ))
   )}
     {error && <ErrorMessage message={error} />}
+    <button onClick={handleReturn}>Return</button>
   </div>
   );
 }
