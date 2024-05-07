@@ -1,3 +1,3 @@
-// import Playlists from './Playlists';
+import Playlists from './Playlists';
 
-// export default Playlists;
+export default Playlists;

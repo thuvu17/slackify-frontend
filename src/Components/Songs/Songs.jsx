@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BACKEND_URL } from '../../constants';
 import Player from '../Player';
 import { Form } from "react-bootstrap"
+import { useAuth } from '../AuthProvider/AuthProvider';
 
 const SONGS_EP = `${BACKEND_URL}/songs`;
 const TOKEN_EP = `${BACKEND_URL}/token`;
@@ -120,6 +121,7 @@ function Songs() {
   const [token, setToken] = useState('');
   const showAddSongForm = () => { setAddingSong(true); };
   const hideAddSongForm = () => { setAddingSong(false); };
+  const { isAdmin } = useAuth()
    
   const fetchSongs = () => {
     axios.get(SONGS_EP)
@@ -191,15 +193,19 @@ function Songs() {
         onChange={e => setSearch(e.target.value)}
       />
     <h1>View All Songs</h1>
+    
+    { isAdmin &&
     <button type="button" onClick={showAddSongForm}>
       Add a Song
-    </button>
-    <AddSongForm
+    </button> }
+
+    { isAdmin && <AddSongForm
       visible={addingSong}
       cancel={hideAddSongForm}
       fetchSongs={fetchSongs}
       setError={setError}
-    />
+    /> }
+
     <Player
       token={token}
       trackUri={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}

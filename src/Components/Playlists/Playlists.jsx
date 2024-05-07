@@ -52,10 +52,6 @@ function AddPlaylistForm({
       <button type="button" onClick={cancel}>Cancel</button>
       <button type="submit" onClick={addPlaylist}>Submit</button>
 
-      {/* <div className='add-playlist-result'>
-        <td>{ addPlaylistResult }</td>
-      </div> */}
-
     </form>
   );
 }
@@ -95,7 +91,7 @@ function Playlists() {
   const [addingPlaylist, setAddingPlaylist] = useState(false);
   const showAddPlaylistForm = () => { setAddingPlaylist(true); };
   const hideAddPlaylistForm = () => { setAddingPlaylist(false); };
-  const { user_id } = useAuth()
+  const { user_id, isAdmin } = useAuth()
    
   const fetchPlaylists = (user_id) => {
     axios.get(`${GET_PLAYLIST_EP}/${user_id}`)
@@ -145,24 +141,24 @@ function Playlists() {
   return (
   <div className="wrapper">
     <h1>View All Playlists</h1>
-    <button type="button" onClick={showAddPlaylistForm}>
+    { isAdmin && <button type="button" onClick={showAddPlaylistForm}>
       Add a Playlist
-    </button>
+    </button> }
 
-    <AddPlaylistForm
+    { isAdmin && <AddPlaylistForm
       visible={addingPlaylist}
       cancel={hideAddPlaylistForm}
       fetchPlaylists={fetchPlaylists}
       setError={setError}
       setSuccessMsg={setSuccessMsg}
-    />
+    /> }
       {error && <ErrorMessage message={error} />}
       {successMsg && <ErrorMessage message={successMsg} />}
           {playlists.map((playlist) => (
               <div className='playlist-container' key={playlist.name}>
         <h2>{playlist.name}</h2>
-          <p>Email: {playlist.date_created}</p>
-          <p>Song: {playlist.song}</p>
+          <p>Date Created: {playlist.date_created}</p>
+
           <button className="del_button" onClick={() => delPlaylist(user_id, playlist.name)}>Delete</button>
       </div>
     ))}

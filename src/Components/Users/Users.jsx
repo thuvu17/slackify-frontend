@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 
 import { BACKEND_URL } from '../../constants';
+import { useAuth } from '../AuthProvider/AuthProvider';
 
 const USERS_EP = `${BACKEND_URL}/users`;
 
@@ -97,6 +98,7 @@ function Users() {
   const [addingUser, setAddingUser] = useState(false);
   const showAddUserForm = () => { setAddingUser(true); };
   const hideAddUserForm = () => { setAddingUser(false); };
+  const { isAdmin } = useAuth();
    
   const fetchUsers = () => {
     axios.get(USERS_EP)
@@ -130,29 +132,35 @@ function Users() {
       },
       [],
   );
-
-  return (
-  <div className="wrapper">
-    <h1>View All Users</h1>
-    <button type="button" onClick={showAddUserForm}>
-      Add a User
-    </button>
-    <AddUserForm
-      visible={addingUser}
-      cancel={hideAddUserForm}
-      fetchUsers={fetchUsers}
-      setError={setError}
-    />
-          {users.map((user) => (
-              <div className='user-container' key={user._id}>
-        <h2>{user.name}</h2>
-          <p>Email: {user.email}</p>
-          <p>Password: {user.password}</p>
-      </div>
-    ))}
-    {error && <ErrorMessage message={error} />}
-  </div>
+  if (isAdmin) {
+    return (
+    <div className="wrapper">
+      <h1>View All Users</h1>
+      <button type="button" onClick={showAddUserForm}>
+        Add a User
+      </button>
+      <AddUserForm
+        visible={addingUser}
+        cancel={hideAddUserForm}
+        fetchUsers={fetchUsers}
+        setError={setError}
+      />
+            {users.map((user) => (
+                <div className='user-container' key={user._id}>
+          <h2>{user.name}</h2>
+            <p>Email: {user.email}</p>
+            <p>Password: {user.password}</p>
+        </div>
+      ))}
+      {error && <ErrorMessage message={error} />}
+    </div>
+    );
+  }else {
+    return(
+    <h1>Access Denied</h1>
   );
+
+  }
 }
 
 export default Users;

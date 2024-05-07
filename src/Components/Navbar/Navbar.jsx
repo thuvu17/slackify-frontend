@@ -5,12 +5,17 @@ import { useAuth } from '../AuthProvider/AuthProvider';
 
 const USER_MENU_URL = '/user_menu';
 
-const LOGGEDIN_PAGES = [
+const USER_PAGES = [
   { label: 'Home', destination: '/' },
   { label: 'View All Songs', destination: '/songs' },
-  { label: 'View All Users', destination: '/users' },
-  //  { label: 'View Form', destination: '/form' },
   { label: 'View All Playlists', destination: '/playlists' },
+];
+
+const ADMIN_PAGES = [
+  { label: 'Home', destination: '/' },
+  { label: 'View All Songs', destination: '/songs' },
+  { label: 'View All Playlists', destination: '/playlists' },
+  { label: 'View All Users', destination: '/users' },
 ];
 
 const LOGGEDOUT_PAGES = [
@@ -35,13 +40,17 @@ NavLink.propTypes = {
 };
 
 function Navbar() {
-  const { isLoggedIn, user_id } = useAuth()
+  const { isLoggedIn, user_id, isAdmin } = useAuth()
+  const pagesToRender = isLoggedIn ? isAdmin? ADMIN_PAGES : USER_PAGES : LOGGEDOUT_PAGES;
+  console.log(isAdmin);
 
-  if (isLoggedIn && !LOGGEDIN_PAGES.some((page) => (page.label === 'Profile'))) {
-    LOGGEDIN_PAGES.push({ label: 'Profile', destination: `${USER_MENU_URL}/${user_id}` });
+  if (!isAdmin && isLoggedIn && (!USER_PAGES.some((page) => (page.label === 'Profile'))) ) {
+    pagesToRender.push({ label: 'Profile', destination: `${USER_MENU_URL}/${user_id}` });
   }
 
-  const pagesToRender = isLoggedIn ? LOGGEDIN_PAGES : LOGGEDOUT_PAGES
+  if (isAdmin && isLoggedIn && (!ADMIN_PAGES.some((page) => (page.label === 'Profile'))) ) {
+    pagesToRender.push({ label: 'Profile', destination: `${USER_MENU_URL}/${user_id}` });
+  }
 
     return (
       <>
