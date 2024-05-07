@@ -96,7 +96,9 @@ AddSongForm.propTypes = {
 function SongsObjectToArray({ Data }) {
   const keys = Object.keys(Data);
   const Songs = keys.map((key) => Data[key]);
+  console.log(Songs)
   return Songs;
+  
 }
 
 
@@ -133,6 +135,7 @@ function Songs() {
       () => {
           axios.get(SONGS_EP)
               .then((response) => {
+                console.log("data", response.data)
                   setSongs(SongsObjectToArray(response.data));
               })
               .then()
@@ -160,7 +163,6 @@ function Songs() {
     () => {
         axios.get(TOKEN_EP)
             .then((response) => {
-                console.log(response)
                 setToken(response.data);
             })
             .then()
@@ -193,7 +195,7 @@ function Songs() {
         onChange={e => setSearch(e.target.value)}
       />
     <h1>View All Songs</h1>
-    
+
     { isAdmin &&
     <button type="button" onClick={showAddSongForm}>
       Add a Song

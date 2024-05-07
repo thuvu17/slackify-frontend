@@ -42,7 +42,6 @@ NavLink.propTypes = {
 function Navbar() {
   const { isLoggedIn, user_id, isAdmin } = useAuth()
   const pagesToRender = isLoggedIn ? isAdmin? ADMIN_PAGES : USER_PAGES : LOGGEDOUT_PAGES;
-  console.log(isAdmin);
 
   if (!isAdmin && isLoggedIn && (!USER_PAGES.some((page) => (page.label === 'Profile'))) ) {
     pagesToRender.push({ label: 'Profile', destination: `${USER_MENU_URL}/${user_id}` });

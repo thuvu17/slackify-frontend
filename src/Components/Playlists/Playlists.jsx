@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import propTypes from 'prop-types';
 import axios from 'axios';
 
@@ -9,6 +10,8 @@ const PLAYLISTS_EP = `${BACKEND_URL}/playlists`;
 const GET_PLAYLIST_EP = `${PLAYLISTS_EP}/get`;
 const DEL_PLAYLIST_EP = `${PLAYLISTS_EP}/delete`;
 
+const PLAYLIST_URL = '/playlist';
+
 
 function AddPlaylistForm({
   visible,
@@ -18,12 +21,8 @@ function AddPlaylistForm({
   setSuccessMsg,
 }) {
   const [name, setName] = useState('');
-  // const [addPlaylistResult, setAddPlaylistResult] = useState('');
-  const { user_id } = useAuth()
-
+  const { user_id } = useAuth();
   const changeName = (event) => { setName(event.target.value); };
-  // const changeSucessMsg = () => { setAddPlaylistResult(`has been added to the database`); };
-  // const changeFailMsg = () => { setAddPlaylistResult(`There is some issue adding the playlist`); };
 
   const addPlaylist = (event) => {
     event.preventDefault();
@@ -91,7 +90,8 @@ function Playlists() {
   const [addingPlaylist, setAddingPlaylist] = useState(false);
   const showAddPlaylistForm = () => { setAddingPlaylist(true); };
   const hideAddPlaylistForm = () => { setAddingPlaylist(false); };
-  const { user_id } = useAuth()
+  const { user_id } = useAuth();
+  const navigate = useNavigate();
    
   const fetchPlaylists = (user_id) => {
     axios.get(`${GET_PLAYLIST_EP}/${user_id}`)
@@ -110,6 +110,10 @@ function Playlists() {
     .catch(() => {
       setError('There was a problem deleting the playlist.');
     });
+  }
+
+  const viewPlaylist = (user_id, name) => {
+    navigate(`${PLAYLIST_URL}/${user_id}/${name}`, {replace: true});
   }
 
   useEffect(
@@ -155,12 +159,11 @@ function Playlists() {
       {error && <ErrorMessage message={error} />}
       {successMsg && <ErrorMessage message={successMsg} />}
           {playlists.map((playlist) => (
-              <div className='playlist-container' key={playlist.name}>
-        <h2>{playlist.name}</h2>
-          <p>Date Created: {playlist.date_created}</p>
-
-          <button className="del_button" onClick={() => delPlaylist(user_id, playlist.name)}>Delete</button>
-      </div>
+            <div className='playlist-container' key={playlist.name} onClick={() => viewPlaylist(user_id, playlist.name)}>
+              <h2>{playlist.name}</h2>
+              <p>Date Created: {playlist.date_created}</p>
+              <button className="del_button" onClick={() => delPlaylist(user_id, playlist.name)}>Delete</button>
+            </div>
     ))}
     
   </div>
