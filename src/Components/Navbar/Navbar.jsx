@@ -2,8 +2,10 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthProvider/AuthProvider';
+import { useNavigate } from "react-router-dom";
 
 const USER_MENU_URL = '/user_menu';
+const HOME_URL = '/';
 
 const USER_PAGES = [
   { label: 'Home', destination: '/' },
@@ -42,6 +44,7 @@ NavLink.propTypes = {
 function Navbar() {
   const { isLoggedIn, user_id, isAdmin } = useAuth()
   const pagesToRender = isLoggedIn ? isAdmin? ADMIN_PAGES : USER_PAGES : LOGGEDOUT_PAGES;
+  const navigate = useNavigate();
 
   if (!isAdmin && isLoggedIn && (!USER_PAGES.some((page) => (page.label === 'Profile'))) ) {
     pagesToRender.push({ label: 'Profile', destination: `${USER_MENU_URL}/${user_id}` });
@@ -51,10 +54,14 @@ function Navbar() {
     pagesToRender.push({ label: 'Profile', destination: `${USER_MENU_URL}/${user_id}` });
   }
 
+  function handleClick() {
+    navigate(`${HOME_URL}`)
+  }
+
     return (
       <>
       <nav>
-        <div className='title'>Slackify</div>
+        <button className='title' onClick={handleClick}>Slackify</button>
         <ul className="wrapper">
           {pagesToRender.map((page) => <NavLink key={page.destination} page={page}/>)}
         </ul>
