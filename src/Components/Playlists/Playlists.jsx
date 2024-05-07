@@ -148,7 +148,10 @@ function Playlists() {
           {playlists.map((playlist) => (
             <div className='playlist-container' key={playlist.name} onClick={() => viewPlaylist(user_id, playlist.name)}>
               <h2>{playlist.name}</h2>
-              <p>Date Created: {playlist.date_created}</p>
+              <p>Created on {playlist.date_created}</p>
+              {playlist.songs.length === 0 ? (
+                <p>0 song</p>) :
+              (<p>{playlist.songs.length} songs</p>)}
             </div>
     ))}
     

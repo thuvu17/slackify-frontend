@@ -281,8 +281,11 @@ a.link-styles:hover {
 
 .del-button {
   width: 120px;
-  align-self: flex-end;
-  margin-left:auto !important;
+  display: center;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+  padding: auto;
 }
 
 .return-button {
@@ -309,11 +312,23 @@ a.link-styles:hover {
 .playlist-subheader {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .playlist-name-button {
   border: none;
   background:url('../public/edit.png') no-repeat;
+  background-size: 20px;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.playlist-name-button:focus ,
+.playlist-name-button:hover {
+  border: none;
+  background:url('../public/edit.png') no-repeat;
+  background-color: none;
   background-size: 20px;
   width: 20px;
   height: 20px;
@@ -330,6 +345,7 @@ a.link-styles:hover {
   margin-inline-end: 0px;
   margin-inline-start: 0px;
 }
+
 .changeNameForm button {
   width: 70px;
   height: 30px;

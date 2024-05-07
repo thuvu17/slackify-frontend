@@ -72,6 +72,7 @@ function UpdatePlaylistNameForm({
 }
 
 UpdatePlaylistNameForm.propTypes = {
+  name: propTypes.string.isRequired,
   visible: propTypes.bool.isRequired,
   cancel: propTypes.func.isRequired,
   setError: propTypes.func.isRequired,
@@ -151,7 +152,11 @@ function Playlist() {
     </div>
     
     <div className='playlist-subheader'>
-      <h3>Date Created: {thisDate}</h3>
+      <div>
+      <h3>Created on {thisDate}</h3>
+        {songs.length === 0 ? (<h3>0 song</h3>) :
+          (<h3>{songs.length} songs</h3>)}
+      </div>
       <button className="del-button" onClick={() => delPlaylist(user_id, thisName)}>Delete</button>
     </div>
 
