@@ -370,3 +370,53 @@ a.link-styles:hover {
  font-size: 28px;
  max-width: 150px;
 }
+
+.popup-content {
+  z-index: 2;
+  display: block;
+  width: 50%;
+  height: 70%;
+  background-color: var(--off-white);
+  border-radius: 15px;
+  padding: 10px;
+  border: 2px solid var(--buff);
+}
+
+.popup-text {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.popup-content h3 {
+  color: var(--black); 
+  font-size: 20px;
+  margin-top: 0px;
+}
+
+.popup-content p {
+  color: var(--black); 
+  font-size: 16px;
+}
+
+.popup-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0px;
+  margin: 0px;
+}
+
+.popup-content button {
+  width: 70px;
+  height: 30px;
+  padding: 0px;
+  margin: 15px;
+  font-size: 15px;
+  text-align: center;
+  vertical-align:middle;
+}
+
+.close {
+  /* display:flex;
+  justify-content: right; */
+}

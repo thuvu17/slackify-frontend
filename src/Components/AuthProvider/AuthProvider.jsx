@@ -1,4 +1,4 @@
-// come form source: https://dev.to/miracool/how-to-manage-user-authentication-with-react-js-3ic5
+// reference: https://dev.to/miracool/how-to-manage-user-authentication-with-react-js-3ic5
 
 import React, { useContext, createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
