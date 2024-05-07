@@ -417,6 +417,6 @@ a.link-styles:hover {
 }
 
 .close {
-  /* display:flex;
-  justify-content: right; */
+  display:flex;
+  justify-content: right;
 }

@@ -160,12 +160,6 @@ function Songs() {
     setError('');
     setSuccessMsg('');
   };
-  // const [addingToPlaylist, setAddingToPlaylist] = useState(false);
-  // const showSongPlaylistForm = () => { setAddingToPlaylist(true); };
-  // const hideSongPlaylistForm = () => { 
-  //   setAddingToPlaylist(false);
-  // };
-  
 
   const { isAdmin } = useAuth()
   const navigate = useNavigate();
