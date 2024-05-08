@@ -49,10 +49,33 @@ li {
   margin-top: 1rem;
 }
 
+.home-body {
+  text-align: center;
+  color: var(--off-white);
+  font-size: 20;
+}
+
+.recommend-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recommend-form {
+  margin-top: 10vh;
+  width: 300px;
+  text-align: center;
+}
+
+.recommend-button {
+  width: 150px;
+  margin: 5vh;
+}
+
 .photo {
   height: 350px;
   width: 350px;
-  align-items: 'center';
+  align-items: center;
   text-align: center;
   display: block;
   justify-content: center;
@@ -185,7 +208,7 @@ nav ul {
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 0;
-  align-items: end;
+  align-items: flex-end;
 }
 
 nav a {
@@ -277,8 +300,8 @@ nav a:focus {
   height: 100%;
   display:flex;
   flex-direction: column;
-  justify-content: end;
-  align-items: end;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .userHome-title {
@@ -334,7 +357,7 @@ a.link-styles:hover {
 
 .playlist-header {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -367,7 +390,7 @@ a.link-styles:hover {
 .changeNameForm {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   height: 42.67px;
   margin-block-end: 21.44px;
   margin-block-start: 21.44px;
@@ -452,7 +475,7 @@ a.link-styles:hover {
 
 .playlist-name-selector {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 
