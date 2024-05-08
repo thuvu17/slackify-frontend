@@ -78,7 +78,7 @@ function Home() {
             </form>           
          </div>
 
-         {recommendedSongs && (
+         {recommendedSongs ? (
             <div>
                   <div className='song-container' key={recommendedSongs._id}>
                   <div className='playlist-song-subcontainer'>
@@ -101,7 +101,12 @@ function Home() {
                   </div>
                </div>
           </div> 
-         )}
+         ) : (
+            <div className="error-message">
+               <p>Results not found</p>
+            </div>
+               )}
+
       </>
 
    );
