@@ -47,7 +47,7 @@ function Home() {
          <div className="recommend-container">
             <form className="recommend-form">
                <div>
-                  <p>What exercise are you doing today?</p>
+                  <p className = "home-question">What exercise are you doing today?</p>
                   <select id="exercise" name="exercise" onChange={changeExercise}>
                      <option value="yoga">Yoga</option>
                      <option value="pilates">Pilates</option>
@@ -56,7 +56,7 @@ function Home() {
                      <option value="lifting">Weightlifting</option>
                      <option value="boxing">Boxing</option>
                      <option value="aerobics">Aerobics</option>
-                     </select>
+                  </select>
                </div>
                <div style={{ display: exercise === "jog" ? 'flex' : 'none', flexDirection:"column", justifyContent: 'center', alignItems:'center'}}>
                   <div>
@@ -77,7 +77,7 @@ function Home() {
          </div>
 
          {submitted && (recommendedSongs ? (
-            <div>
+            <div className = "recommended-song-container">
                <div className='song-container' key={recommendedSongs._id}>
                   <div className='playlist-song-subcontainer'>
                      <h2>{recommendedSongs.name}</h2>
