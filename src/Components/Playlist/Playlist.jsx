@@ -10,8 +10,10 @@ const PLAYLIST_EP = `${BACKEND_URL}/playlist`;
 const PLAYLISTS_EP = `${BACKEND_URL}/playlists`;
 const UPDATE_PLAYLIST_NAME_EP = `${PLAYLISTS_EP}/Update`;
 const DEL_PLAYLIST_EP = `${PLAYLISTS_EP}/delete`;
+const DELETE_PLAYLIST_SONG_EP = `${PLAYLIST_EP}/Update/delete`;
 const PLAYLISTS_URL = '/playlists';
 const PLAYLIST_URL = '/playlist';
+
 
 function SongsObjectToArray(Data) {
   const keys = Object.keys(Data);
@@ -83,8 +85,8 @@ function Playlist() {
   const [thisName, setName] = useState('');
   const [thisDate, setDate] = useState('');
   const [error, setError] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
   const params = useParams();
-  console.log(params)
   const this_user_id = useState(params.user_id)[0]
   const name = useState(params.name)[0]
   const { user_id } = useAuth();
@@ -97,6 +99,13 @@ function Playlist() {
   };
 
   if (this_user_id === user_id) {
+
+  const fetchSongs = () => {
+    axios.get(`${PLAYLIST_EP}/${user_id}/${name}`)
+      .then((response) => setSongs(SongsObjectToArray(response.data.Data.songs)))
+      .catch(() => setError('There was a problem retrieving the list of Songs.'));
+  };
+
   useEffect(
     () => {
         axios.get(`${PLAYLIST_EP}/${user_id}/${name}`)
@@ -140,6 +149,19 @@ function Playlist() {
       setError('There was a problem deleting the playlist.');
     });
   }
+
+  const delSong = (name, artist, song_id) => {
+    axios.put(`${DELETE_PLAYLIST_SONG_EP}/${user_id}/${thisName}/${song_id}`)
+    .then(() => {
+      fetchSongs();
+      setSuccessMsg(`${name} by ${artist} has been deleted`);
+    }
+    )
+    .catch(() => {
+      setError('There was a problem deleting the playlist.');
+    });
+  }
+
   
   return (
   <div className="wrapper">
@@ -165,10 +187,14 @@ function Playlist() {
     </div>
 
     {error && <ErrorMessage message={error} />}
+    {successMsg && <ErrorMessage message={successMsg} />}
     { songs.length === 0 ? (<p>There is no song in the playlist. Go add one now.</p>)
     : (songs.map((song) => (
         <div className='playlist-song-container' key={song._id}>
-          <h2>{song.name}</h2>
+          <div>
+            <h2>{song.name}</h2>
+            <button className="del-button" onClick={() => delSong(song.name, song.artist, song._id)}>Delete</button>
+          </div>
             <p>Aritst: {song.artist}</p>
             <p>Album: {song.album}</p>
             <p>Energy: {song.energy}</p>
