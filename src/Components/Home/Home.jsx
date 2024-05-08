@@ -36,12 +36,10 @@ function Home() {
          } else {
             response = await axios.get(`${SONG_REC_ENERGY_EP}/${exercise}`);
          }
-         console.log(response.data)
          setRecommendedSongs((response.data));
          setSubmitted(true);
       } catch (error) {
          console.error("Error fetching recommended song:", error);
-         console.log(error);
       }
    };
 

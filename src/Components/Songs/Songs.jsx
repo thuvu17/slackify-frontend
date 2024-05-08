@@ -93,10 +93,8 @@ AddSongForm.propTypes = {
 
 
 function SongsObjectToArray({ Data }) {
-  console.log(Data)
   const keys = Object.keys(Data);
   const Songs = keys.map((key) => Data[key]);
-  console.log(Songs)
   return Songs;
 }
 
@@ -140,7 +138,6 @@ function Songs() {
       () => {
           axios.get(SONGS_EP)
               .then((response) => {
-                console.log(response.data)
                   setSongs(SongsObjectToArray(response.data));
               })
               .then()

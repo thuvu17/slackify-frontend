@@ -35,7 +35,6 @@ function CreateAccountForm() {
             setError('Passwords do not match.');
             return
         }
-      console.log()
       axios.post(CREATE_ACCOUNT_EP, {name, email, password})
         .then(() => {
             changeSucessMsg();

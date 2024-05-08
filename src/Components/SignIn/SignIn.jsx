@@ -18,8 +18,6 @@ function SignInForm() {
     const [showPassword, setShowPassword] = useState(false)
     const { logIn, isLoggedIn, user_id } = useAuth()
 
-    console.log("Sign in page isLoggedIn", isLoggedIn)
-
     if (isLoggedIn) {
         navigate(`${USER_MENU_URL}/${user_id}`, {replace: true});
     }
