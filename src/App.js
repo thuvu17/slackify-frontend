@@ -6,8 +6,6 @@ import {
 } from 'react-router-dom';
 
 import './App.css';
-// import { Helmet } from "react-helmet";
-
 import Home from './Components/Home';
 import Navbar from './Components/Navbar';
 import Songs from './Components/Songs';
