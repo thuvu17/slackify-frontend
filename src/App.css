@@ -133,6 +133,15 @@ button:hover {
   color: var(--off-white);
 }
 
+.playlist-error-message {
+  border: 2px solid var(--buff);
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 5px;
+  color: var(--black);
+}
+
+
 form input {
   display: block;
   margin: .5rem 0 1rem 0;

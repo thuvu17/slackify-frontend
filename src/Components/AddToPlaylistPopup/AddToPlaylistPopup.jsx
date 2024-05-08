@@ -16,7 +16,7 @@ const PLAYLIST_URL = '/playlist';
 
 function ErrorMessage({ message }) {
   return (
-    <div className="error-message">
+    <div className="playlist-error-message">
       {message}
     </div>
   );
@@ -114,7 +114,7 @@ function AddToPlaylistPopup({
               />
             </div>
           </div>
-          {error && <ErrorMessage message={error} />}
+          {error && <ErrorMessage message={error}/>}
         <div className='popup-buttons'>
           <button type="submit" onClick={addtoPlaylist}>Submit</button>
           <button type="button" onClick={closeModal}>Cancel</button>
