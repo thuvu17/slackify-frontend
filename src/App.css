@@ -268,11 +268,16 @@ nav a:focus {
   align-items: center;
 }
 
+.playlist-song-subcontainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .song-buttons {
   height: 100%;
   display:flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: end;
   align-items: end;
 }
 

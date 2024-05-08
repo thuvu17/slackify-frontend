@@ -191,7 +191,7 @@ function Playlist() {
     { songs.length === 0 ? (<p>There is no song in the playlist. Go add one now.</p>)
     : (songs.map((song) => (
         <div className='playlist-song-container' key={song._id}>
-          <div>
+          <div className='playlist-song-subcontainer'>
             <h2>{song.name}</h2>
             <button className="del-button" onClick={() => delSong(song.name, song.artist, song._id)}>Delete</button>
           </div>

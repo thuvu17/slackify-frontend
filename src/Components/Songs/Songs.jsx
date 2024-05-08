@@ -230,8 +230,11 @@ const delSong = (name, artist) => {
     />
     {songs.map((song) => (
       <div className='song-container' key={song._id}>
-        <h2>{song.name}</h2>
-          <div className='song-subcontainer'>
+        <div className='playlist-song-subcontainer'>
+          <h2>{song.name}</h2>
+          {isAdmin && <button className="del-button" onClick={() => delSong(song.name, song.artist)}>Delete</button>}
+        </div>
+        <div className='song-subcontainer'>
             <div>
               <p>Aritst: {song.artist}</p>
               <p>Album: {song.album}</p>
@@ -244,7 +247,6 @@ const delSong = (name, artist) => {
                 artist={song.artist}
                 song_id={song._id}
               />
-              <button className="del-button" onClick={() => delSong(song.name, song.artist)}>Delete</button>
             </div>
           </div>
       </div>

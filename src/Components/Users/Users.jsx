@@ -171,13 +171,15 @@ function Users() {
       {successMsg && <ErrorMessage message={successMsg} />}
       {users.map((user) => (
         <div className='user-container' key={user._id}>
-          <h2>{user.name}</h2>
+          <div className='playlist-song-subcontainer'>
+            <h2>{user.name}</h2>
+            <button className="del-button" onClick={() => delUser(user.email)}>Delete</button>
+          </div>
           <div className='user-subcontainer'>
             <div>
               <p>Email: {user.email}</p>
               <p>Password: {user.password}</p>
             </div>
-            <button className="del-button" onClick={() => delUser(user.email)}>Delete</button>
           </div>
         </div>
       ))}
