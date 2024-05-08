@@ -5,12 +5,10 @@ import axios from 'axios';
 
 import { BACKEND_URL } from '../../constants';
 
-// const USER_MENU_URL = '/user_menu';
 const CREATE_ACCOUNT_EP = `${BACKEND_URL}/users`;
 
 
 function CreateAccountForm() {
-//   const navigate = useNavigate();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -26,7 +24,6 @@ function CreateAccountForm() {
   const changePassword = (event) => {setPassword(event.target.value)}
   const changeRePassword = (event) => {setRePassword(event.target.value)}
   const changeSucessMsg = () => { setCreateUserResult(`Account ${email} has been created. Log in with your email and password now.`); };
-//   const changeFailMsg = (event) => { setCreateUserResult(event.target.value); };
 
   const createUser = (event) => {
       event.preventDefault();

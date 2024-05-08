@@ -40,7 +40,6 @@ function AddUserForm({
       })
       .catch(error => {
         if (error.response) {
-          // console.error(error.response.data);
           setSuccessMsg('');
           setError(error.response.data.message);
         }

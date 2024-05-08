@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from '../../constants';
-// import SongsObjectToArray from '../Songs/Songs';
 import AddToPlaylistPopup from '../AddToPlaylistPopup/AddToPlaylistPopup';
 import { useAuth } from '../AuthProvider/AuthProvider';
 
 const SONG_REC_EP = `${BACKEND_URL}/rec`;
 const SONG_REC_AVG_STRIDE_EP = `${SONG_REC_EP}/avg_stride`;
 const SONG_REC_ENERGY_EP = `${SONG_REC_EP}/workout`
-// const SONG_REC_STRIDE_EP = `${SONG_REC_EP}/stride`;
-// const SONG_REC_HEIGHT_EP = `${SONG_REC_EP}/height`;
 
 
 function Home() {
