@@ -1,26 +1,38 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { BACKEND_URL } from '../../constants';
+// import SongsObjectToArray from '../Songs/Songs';
+import AddToPlaylistPopup from '../AddToPlaylistPopup/AddToPlaylistPopup';
 
-const SONG_REC_EP = '/rec';
+const SONG_REC_EP = `${BACKEND_URL}/rec`;
 const SONG_REC_AVG_STRIDE_EP = `${SONG_REC_EP}/avg_stride`;
+const SONG_REC_ENERGY_EP = `${SONG_REC_EP}/workout`
 // const SONG_REC_STRIDE_EP = `${SONG_REC_EP}/stride`;
 // const SONG_REC_HEIGHT_EP = `${SONG_REC_EP}/height`;
+
 
 function Home() {
    const [speed, setSpeed] = useState("");
    const [gender, setGender] = useState("");
    const [exercise, setExercise] = useState("");
-   const [recommendedSong, setRecommendedSong] = useState("");
+   const [recommendedSongs, setRecommendedSongs] = useState([]);
 
    const changeExercise = (event) => { setExercise(event.target.value); };
 
    const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-         const response = await axios.get(`${SONG_REC_AVG_STRIDE_EP}/${speed}/${gender}`);
-         setRecommendedSong(response.data);
+         let response;
+         if (exercise === "jog") {
+            response = await axios.get(`${SONG_REC_AVG_STRIDE_EP}/${speed}/${gender}`);
+         } else {
+            response = await axios.get(`${SONG_REC_ENERGY_EP}/${exercise}`);
+         }
+         console.log(response.data)
+         setRecommendedSongs((response.data));
       } catch (error) {
          console.error("Error fetching recommended song:", error);
+         console.log(error);
       }
    };
    return (
@@ -66,11 +78,30 @@ function Home() {
             </form>           
          </div>
 
-          {recommendedSong && (
-            <div className="recommended-song">
-              Get Song: {recommendedSong}
-            </div>
-          )}
+         {recommendedSongs && (
+            <div>
+                  <div className='song-container' key={recommendedSongs._id}>
+                  <div className='playlist-song-subcontainer'>
+                     <h2>{recommendedSongs.name}</h2>
+                  </div>
+                  <div className='song-subcontainer'>
+                     <div>
+                        <p>Aritst: {recommendedSongs.artist}</p>
+                        <p>Album: {recommendedSongs.album}</p>
+                        <p>Energy: {recommendedSongs.energy}</p>
+                        <p>BPM: {recommendedSongs.bpm}</p>
+                     </div>
+                     <div className='song-buttons'>
+                        <AddToPlaylistPopup
+                           name={recommendedSongs.name}
+                           artist={recommendedSongs.artist}
+                           song_id={recommendedSongs._id}
+                        />
+                     </div>
+                  </div>
+               </div>
+          </div> 
+         )}
       </>
 
    );
