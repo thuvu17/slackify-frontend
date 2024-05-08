@@ -12,6 +12,13 @@ Our demo-frontend that currently runs on http://localhost:3000
 3. Move (cd slackify-frontend) into the repo folder and install the dependencies with npm install:
     * `npm install axios`
     * `npm install react-router-dom`
+    * `npm install react-scripts`
+    * `npm install react-spotify-web-playback`
+    * `npm install reactjs-popup`
+    * `npm install react-bootstrap`
+    * `npm install react-dropdown-select`
+    * `npm install react-icons`
+
 4. From the back-end run `$ pip install -U flask-cors`
 ```
 from flask import Flask
